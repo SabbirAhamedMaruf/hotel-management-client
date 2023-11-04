@@ -9,7 +9,7 @@ const Footer = () => {
         <aside>
         <Link className="hidden lg:block">
             <img src={logoWhite} className="w-44"/>
-            <h1 className="font-semibold text-3xl ml-3">Real State</h1>
+            <h1 className="font-semibold text-3xl ml-3">Ilk Lodge</h1>
           </Link>
         </aside>
         <nav>
