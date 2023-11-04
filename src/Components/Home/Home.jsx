@@ -3,8 +3,8 @@ import Navbar from "../Shared/Navbar";
 
 const Home = () => {
     return (
-        <div className="">
-            <div className="w-[95%] lg:w-[90%] m-auto">
+        <div>
+            <div className="w-[95%] m-auto">
                 <Navbar/>
             </div>
             <Footer/>

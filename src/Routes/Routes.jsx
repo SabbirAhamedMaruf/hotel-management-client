@@ -4,6 +4,7 @@ import Root from "../Layout/Root";
 import Errorpage from "../Components/Error/Errorpage";
 import Home from "../Components/Home/Home";
 import Login from "../Components/Security/Login";
+import Register from "../Components/Security/Register";
 
 const routes = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const routes = createBrowserRouter([
       {
         path:"/login",
         element:<Login/>
+      },
+      {
+        path:"/register",
+        element:<Register/>
       }
     ],
   },

@@ -10,7 +10,7 @@ const Navbar = () => {
   const {theme,changeTheme} = useTheme();
   return (
     <div>
-      <div className="grid grid-cols-3 items-center">
+      <div className="grid grid-cols-3 items-center px-6">
         <div>
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -20,12 +20,12 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <NavLink>Home</NavLink>
+              <NavLink to="/">Home</NavLink>
               <NavLink>Dashboard</NavLink>
             </ul>
           </div>
 
-          <Link className="hidden lg:block">
+          <Link to="/" className="hidden lg:block">
             {
               theme === 'light' ? <img src={logo} className="w-24"/> : <img src={logoWhite} className="w-24"/>
             }
@@ -35,10 +35,15 @@ const Navbar = () => {
 
         <div className="justify-self-center">
    
-        <Link className="lg:hidden"><img src={logo} className="w-16 md:w-20" /></Link>
+        <Link to="/" className="lg:hidden">
+            {
+              theme === 'light' ? <img src={logo} className="w-14"/> : <img src={logoWhite} className="w-14"/>
+            }
+            <h1 className="font-semibold">Real State</h1>
+          </Link>
 
           <ul className="hidden lg:inline font-semibold space-x-5">
-            <NavLink>Home</NavLink>
+            <NavLink to="/">Home</NavLink>
             <NavLink>Dashboard</NavLink>
           </ul>
         </div>
