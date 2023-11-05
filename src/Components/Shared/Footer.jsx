@@ -7,10 +7,10 @@ const Footer = () => {
     <div>
       <footer className="flex flex-col md:flex-row justify-around space-y-5 md:space-y-0 text-center  px-2 lg:px-10 py-32 bg-black dark:bg-[#212538] text-white">
         <aside>
-        <Link className="hidden lg:block">
-            <img src={logoWhite} className="w-44"/>
-            <h1 className="font-semibold text-3xl ml-3">Ilk Lodge</h1>
-          </Link>
+        <Link>
+            <img src={logoWhite} className="m-auto w-24 lg:w-44"/>
+            <h1 className="font-semibold text-xl lg:text-3xl ml-3">Ilk Lodge</h1>
+        </Link>
         </aside>
         <nav>
           <header className="uppercase font-semibold text-[1rem] text-cyan-300">Services</header>

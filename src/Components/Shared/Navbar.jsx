@@ -5,11 +5,10 @@ import { FaSun } from "react-icons/fa";
 import { useTheme } from "../../Hooks/useTheme";
 import logo from "../../assets/Images/logo.png";
 import logoWhite from "../../assets/Images/logo-white.png";
-import { useContext } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
+import "../../index.css"
 
 const Navbar = () => {
-  const { user, handleUserSignOut } = useContext(AuthContext);
+
   const { theme, changeTheme } = useTheme();
   return (
     <div>
@@ -21,10 +20,11 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="navMenu menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <NavLink to="/">Home</NavLink>
               <NavLink to="/dashboard">Dashboard</NavLink>
+              <NavLink to="/rooms">Rooms</NavLink>
             </ul>
           </div>
 
@@ -48,8 +48,11 @@ const Navbar = () => {
             <h1 className="font-semibold">Ilk Lodge</h1>
           </Link>
 
-          <ul className="hidden lg:inline font-semibold space-x-5">
+          <ul className="navMenu hidden lg:inline font-semibold space-x-5">
             <NavLink to="/">Home</NavLink>
+            <NavLink to="/rooms">Rooms</NavLink>
+            <NavLink to="/aboutus">About Us</NavLink>
+            <NavLink to="/blogs">Blogs</NavLink>
             <NavLink to="/dashboard">Dashboard</NavLink>
           </ul>
         </div>
@@ -64,28 +67,7 @@ const Navbar = () => {
           </button>
 
           <div className="relative">
-            {user ? (
-              <>
-                <button className="bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md">
-                  Logout
-                </button>
-
-                <button onClick={()=>handleUserSignOut()} className="bg-gradient-to-l from-cyan-400 to-blue-600 text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md absolute inset-0 opacity-0 transition duration-700 hover:opacity-100">
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <button className="bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md">
-                  Login
-                </button>
-                <Link to="/login">
-                  <button className="bg-gradient-to-l from-cyan-400 to-blue-600 text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md absolute inset-0 opacity-0 transition duration-700 hover:opacity-100">
-                    Login
-                  </button>
-                </Link>
-              </>
-            )}
+ 
           </div>
         </div>
       </div>
