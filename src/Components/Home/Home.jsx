@@ -2,9 +2,10 @@ import Footer from "../Shared/Footer";
 import Navbar from "../Shared/Navbar";
 import UserNavbar from "./UserNavbar";
 import { Map, Marker } from "pigeon-maps";
-import { TbPhoneCheck } from "react-icons/tb";
+import { HiOutlinePhoneIncoming } from "react-icons/hi";
 import { FaRegEnvelopeOpen } from "react-icons/fa";
 import AboutUsSectionGirl from "../../assets/Images/girl.jpg";
+import Banner from "./Banner";
 const Home = () => {
   return (
     <div>
@@ -12,6 +13,14 @@ const Home = () => {
       <div className="w-[95%] lg:w-[70%] m-auto">
         <Navbar />
       </div>
+      <div className="w-[95%] lg:w-[90%] m-auto">
+        <Banner />
+      </div>
+
+
+      
+
+      {/* Home page about us section */}
 
       <div className="grid grid-cols-2 lg:grid-cols-4">
         <div className="col-span-2">
@@ -24,7 +33,7 @@ const Home = () => {
           </Map>
         </div>
         <div className="grid justify-left p-10 bg-slate-900 text-white">
-          <TbPhoneCheck className="lg:text-5xl" />
+          <HiOutlinePhoneIncoming className="text-xl md:text-3xl lg:text-5xl" />
           <h1 className="lg:text-3xl">Contact Us</h1>
           <div className="ml-5 lg:space-y-2">
             <p>Reservation :</p>
@@ -40,7 +49,7 @@ const Home = () => {
           />
           <div className="absolute w-full h-full bg-cyan-400 top-0 opacity-50"></div>
           <div className="absolute p-10  text-white top-0">
-            <FaRegEnvelopeOpen className="lg:text-5xl" />
+            <FaRegEnvelopeOpen className="text-xl md:text-3xl lg:text-5xl" />
             <h1 className="lg:text-3xl mt-3">Drop a line</h1>
             <div className="ml-5 lg:space-y-2">
               <p>Information</p>
