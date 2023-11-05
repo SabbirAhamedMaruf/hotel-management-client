@@ -4,9 +4,12 @@ import PropTypes from "prop-types";
 const HomeSingleTestimonialData = ({ data }) => {
   const { photo, name, reviewText } = data || {};
   return (
-    <div className="flex justify-center items-center gap-5 rounded-xl p-5 bg-white text-black h-[31vh] md:h-[28vh] lg:h-[35vh] w-[95vw] md:w-[60vw] lg:w-[30vw] mr-20">
+    <div className="flex justify-center items-center gap-5 rounded-xl p-5 bg-white dark:bg-[#212538] text-black dark:text-white h-[24vh] lg:h-[35vh] w-[95vw] md:w-[60vw] lg:w-[30vw] mr-20">
       <figure className="flex-1">
-        <img src={photo} className="h-32 md:h-36 lg:h-full rounded-full md:rounded-xl object-cover " />
+        <img
+          src={photo}
+          className="h-32 md:h-36 lg:h-full rounded-full lg:rounded-xl object-cover "
+        />
       </figure>
       <div className="flex-1  text-left">
         <h1 className="flex justify-end">
@@ -41,7 +44,7 @@ const HomeSingleTestimonialData = ({ data }) => {
             checked
           />
         </div>
-        <p>{reviewText}</p>
+        <p className="text-[13px] lg:text-[17px] md:text-normal">{reviewText}</p>
       </div>
     </div>
   );

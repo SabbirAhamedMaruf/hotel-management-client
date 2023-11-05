@@ -17,7 +17,7 @@ const Testimonials = () => {
   console.log(testimonialData);
   return (
     <div className="w-full">
-      <Marquee speed={100} delay={5}>
+      <Marquee speed={100}>
         {testimonialData?.map((i) => (
           <HomeSingleTestimonialData
             key={i._id}

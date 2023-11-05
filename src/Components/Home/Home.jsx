@@ -29,16 +29,18 @@ const Home = () => {
         }}
         className="my-20 h-[60vh] lg:h-[85vh]"
       >
-        <div className="absolute w-full h-[60vh] lg:h-[85vh]  bg-black opacity-40 z-0"></div>
+        <div className="absolute w-full h-[60vh] lg:h-[85vh]  bg-black opacity-60 z-0"></div>
         <div className="flex flex-col space-y-10 lg:h-full">
-          <h1 className="font-Edu font-bold text-3xl md:text-4xl lg:text-7xl text-white text-center z-30 mt-[15%] md:mt-[10%] lg:mt-[7%]">Love from our customer</h1>
-          <Testimonials /> 
+          <h1 className="font-Edu font-bold text-3xl md:text-4xl lg:text-7xl text-white text-center z-30 mt-[15%] md:mt-[10%] lg:mt-[7%]">
+            Love from our customer
+          </h1>
+          <Testimonials />
         </div>
       </div>
 
       {/* Home page about us section */}
 
-      <div className="grid grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 my-20">
         <div className="col-span-2">
           <Map
             height={300}
@@ -48,7 +50,7 @@ const Home = () => {
             <Marker width={50} anchor={[21.417077, 91.981278]} />
           </Map>
         </div>
-        <div className="grid justify-left p-10 bg-slate-900 text-white">
+        <div className="grid justify-left p-10 bg-slate-900 dark:bg-[#212538] text-white">
           <HiOutlinePhoneIncoming className="text-xl md:text-3xl lg:text-5xl" />
           <h1 className="lg:text-3xl">Contact Us</h1>
           <div className="ml-5 lg:space-y-2">
@@ -83,4 +85,3 @@ const Home = () => {
 };
 
 export default Home;
-

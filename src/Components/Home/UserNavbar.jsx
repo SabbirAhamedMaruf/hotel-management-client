@@ -1,9 +1,7 @@
 import { MdPayment } from "react-icons/md";
 import { CgNotes } from "react-icons/cg";
-import { TbHome } from "react-icons/Tb";
 import { GrFacebook } from "react-icons/gr";
 import { BsInstagram, BsYoutube, BsTwitter } from "react-icons/bs";
-
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -41,17 +39,10 @@ const UserNavbar = () => {
         </div>
 
         <div className="justify-self-end flex items-center space-x-5">
-          <Link className="hover:text-cyan-400">Our Review</Link>
-          {user && (
-            <Link className="flex items-center hover:text-cyan-400">
-              <TbHome className="inline text-xl mr-2" />
-              <span>My Bookings</span>
-            </Link>
-          )}
           <div className="relative">
             {user ? (
               <>
-                <button className="bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md">
+                <button className="bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-bold px-2 py-1 md:px-3 lg:px-7 lg:py-2 rounded-md">
                   Logout
                 </button>
                 <button
@@ -81,5 +72,3 @@ const UserNavbar = () => {
 };
 
 export default UserNavbar;
-
-

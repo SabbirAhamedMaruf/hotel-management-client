@@ -8,6 +8,7 @@ import Register from "../Components/Security/Register";
 import PrivateRoutes from "./PrivateRoutes";
 import Dashboard from "../Components/Dashboard/Dashboard";
 import Aboutus from "../Components/AboutUs/Aboutus";
+import Rooms from "../Components/Rooms/Rooms";
 
 const routes = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const routes = createBrowserRouter([
       {
         path:"/aboutus",
         element:<Aboutus/>
+      },
+      {
+        path:"/rooms",
+        element:<Rooms/>
       }
     ],
   },
