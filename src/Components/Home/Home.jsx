@@ -5,7 +5,9 @@ import { Map, Marker } from "pigeon-maps";
 import { HiOutlinePhoneIncoming } from "react-icons/hi";
 import { FaRegEnvelopeOpen } from "react-icons/fa";
 import AboutUsSectionGirl from "../../assets/Images/girl.jpg";
+import hotelreview from "../../assets/Images/hotelreview.jpg";
 import Banner from "./Banner";
+import Testimonials from "./Testimonials";
 const Home = () => {
   return (
     <div>
@@ -17,8 +19,22 @@ const Home = () => {
         <Banner />
       </div>
 
-
-      
+      {/* Hotel Testimonials */}
+      <div
+        style={{
+          backgroundImage: `url(${hotelreview})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+        className="my-20 h-[60vh] lg:h-[85vh]"
+      >
+        <div className="absolute w-full h-[60vh] lg:h-[85vh]  bg-black opacity-40 z-0"></div>
+        <div className="flex flex-col space-y-10 lg:h-full">
+          <h1 className="font-Edu font-bold text-3xl md:text-4xl lg:text-7xl text-white text-center z-30 mt-[15%] md:mt-[10%] lg:mt-[7%]">Love from our customer</h1>
+          <Testimonials /> 
+        </div>
+      </div>
 
       {/* Home page about us section */}
 
@@ -68,4 +84,3 @@ const Home = () => {
 
 export default Home;
 
-// TODO navbar Footer Errorpage ok
