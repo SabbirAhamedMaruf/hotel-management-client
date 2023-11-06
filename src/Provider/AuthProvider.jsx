@@ -9,9 +9,11 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import auth from "../Firebase/Firebase.config";
+import useAxiosSeure from "../Hooks/useAxiosSecure";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
+  const axiosSecure = useAxiosSeure();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   // Register page
@@ -39,12 +41,17 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const email = currentUser?.email || user?.email;
+      const payload = {"email":email};
       setUser(currentUser);
-      console.log(currentUser);
       setLoading(false);
+      if(currentUser){
+        axiosSecure.post("/jwt",payload)
+        .then(res => console.log(res.data))
+      }
     });
     return () => unsubscribe();
-  }, []);
+  }, [axiosSecure,user]);
 
   const AuthContextValue = {
     user,

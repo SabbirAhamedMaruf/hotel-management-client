@@ -9,6 +9,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import Dashboard from "../Components/Dashboard/Dashboard";
 import Aboutus from "../Components/AboutUs/Aboutus";
 import Rooms from "../Components/Rooms/Rooms";
+import SingleRoomDetails from "../Components/Rooms/SingleRoomDetails";
 
 const routes = createBrowserRouter([
   {
@@ -39,7 +40,12 @@ const routes = createBrowserRouter([
       {
         path:"/rooms",
         element:<Rooms/>
+      },
+      {
+        path:"/rooms/singleroomdetails",
+        element:<SingleRoomDetails/>
       }
+
     ],
   },
 ]);

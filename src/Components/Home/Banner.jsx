@@ -64,7 +64,6 @@ const Banner = () => {
           <img src={bed3} className="lg:h-[75vh] w-[95vw] object-cover" />
         </div>
 
-
         <div className="panel relative">
           <div className="absolute w-full h-full bg-black opacity-30"></div>
           <div className="absolute top-[30%] md:top-[40%] md:left-[10%] lg:top-[30%] lg:left-[26%] md:w-[80%] lg:w-[40%] space-y-5">
@@ -80,7 +79,6 @@ const Banner = () => {
           </div>
           <img src={bed4} className="lg:h-[75vh] w-[95vw] object-cover" />
         </div>
-
 
         <div className="panel relative">
           <div className="absolute w-full h-full bg-black opacity-40"></div>

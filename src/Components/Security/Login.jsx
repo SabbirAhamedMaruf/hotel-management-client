@@ -40,7 +40,7 @@ const Login = () => {
       <div className="w-[95%] lg:h-[100vh] m-auto">
         <Navbar />
         <div className="grid justify-center items-center py-5">
-          <div className="flex flex-col lg:flex-row  justify-center gap-10 bg-blue-50 dark:bg-slate-700 rounded-lg p-3 lg:p-16 shadow-2xl">
+          <div className="flex flex-col lg:flex-row  justify-center gap-10 bg-blue-200 dark:bg-slate-700 rounded-lg p-3 lg:p-16 shadow-2xl">
             <div>
               <img
                 src={loginbg}
