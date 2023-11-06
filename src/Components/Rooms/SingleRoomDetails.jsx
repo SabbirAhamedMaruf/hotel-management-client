@@ -12,7 +12,9 @@ import girl1 from "../../assets/Images/girl1.jpg";
 const SingleRoomDetails = () => {
   return (
     <div>
-      <div className="w-[90vw] m-auto"><Navbar /></div>
+      <div className="w-[90vw] m-auto">
+        <Navbar />
+      </div>
       <div className="bg-white dark:bg-slate-900">
         <div
           style={{
@@ -122,7 +124,9 @@ const SingleRoomDetails = () => {
                   <div>
                     <h3 className="font-bold lg:text-xl">Name</h3>
                     <h3 className="lg:font-semibold">Rating 5/5</h3>
-                    <p className="lg:font-semibold">Time : Get data from mongodb from timestamp</p>
+                    <p className="lg:font-semibold">
+                      Time : Get data from mongodb from timestamp
+                    </p>
                     <p className="text-[12px] md:text-[14px]">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Repellat voluptas saepe, fugiat necessitatibus sed hic?
@@ -140,6 +144,7 @@ const SingleRoomDetails = () => {
     </div>
   );
 };
-// TODO fix opacity
 
 export default SingleRoomDetails;
+
+// TODO use date picker package from react dont use date input

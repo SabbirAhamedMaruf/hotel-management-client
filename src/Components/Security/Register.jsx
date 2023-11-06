@@ -7,7 +7,7 @@ import { updateProfile } from "firebase/auth";
 
 const Register = () => {
   const [error, setError] = useState(null);
-  const { createAccountWithEmail,handleUserSignOut } = useContext(AuthContext);
+  const { createAccountWithEmail, handleUserSignOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleEmailLogin = (e) => {
@@ -20,9 +20,7 @@ const Register = () => {
     setError(null);
     // Password validation
     if (password.length < 6) {
-      setError(
-        "Password should contain at least 6 character!"
-      );
+      setError("Password should contain at least 6 character!");
     } else if (!/[A-Z]/.test(password)) {
       setError("Password should contain one uppercase letter!");
     } else if (!/[$*@#!?]/.test(password)) {
@@ -30,9 +28,10 @@ const Register = () => {
     } else {
       createAccountWithEmail(email, password)
         .then((result) => {
-          updateProfile(result.user,{
-            displayName:`${name}`,photoURL:`${photo}`
-          })
+          updateProfile(result.user, {
+            displayName: `${name}`,
+            photoURL: `${photo}`,
+          });
           console.log(result.user);
           handleUserSignOut();
           navigate("/login");
@@ -44,10 +43,10 @@ const Register = () => {
   };
   return (
     <div>
-      <div className="w-[95%] lg:h-[100vh] m-auto">
+      <div className="w-[90%] lg:h-[100vh] m-auto">
         <Navbar />
         <div className="grid justify-center items-center py-5">
-          <div className="flex flex-col lg:flex-row-reverse  justify-center gap-10 bg-blue-200 dark:bg-slate-700 rounded-lg p-3 lg:p-16 shadow-2xl">
+          <div className="flex flex-col lg:flex-row-reverse  justify-center gap-10 bg-white dark:bg-slate-700 rounded-lg p-3 lg:p-16 shadow-2xl">
             <div>
               <img
                 src={registerbg}

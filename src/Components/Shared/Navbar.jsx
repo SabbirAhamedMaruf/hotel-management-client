@@ -80,10 +80,10 @@ const Navbar = () => {
             <NavLink to="/blogs">Blogs</NavLink>
             {user && (
               <div className="dropdown">
-                <button>Profile</button>
+                <button>Dashboard</button>
                 <div
                   tabIndex={0}
-                  className="navMenu  dropdown-content mt-8 px-3  py-4 shadow rounded-b-xl w-60 md:w-72 z-10 bg-white dark:bg-slate-900"
+                  className="navMenu  dropdown-content mt-8 px-3  py-4 shadow rounded-b-xl w-60 md:w-72 z-10 bg-blue-50 dark:bg-slate-900"
                 >
                   {user && (
                     <div className="flex justify-center items-center gap-3 bg-gradient-to-r from-cyan-400 to-blue-600 p-1 rounded-xl">
@@ -97,7 +97,6 @@ const Navbar = () => {
                     </div>
                   )}
                   <div className="flex flex-col text-normal text-[16px] text-center my-5 space-y-2">
-                    <NavLink to="/dashboard">Dashboard</NavLink>
                     <NavLink to="/mybookings">My Bookings</NavLink>
                   </div>
                 </div>
@@ -120,12 +119,14 @@ const Navbar = () => {
               <button className="bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md">
                 Book Now
               </button>
-              <button
-                onClick={() => handleUserSignOut()}
-                className="bg-gradient-to-l from-cyan-400 to-blue-600 text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md absolute inset-0 opacity-0 transition duration-700 hover:opacity-100"
-              >
-                Book Now
-              </button>
+              <Link to="/rooms">
+                <button
+                  onClick={() => handleUserSignOut()}
+                  className="bg-gradient-to-l from-cyan-400 to-blue-600 text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md absolute inset-0 opacity-0 transition duration-700 hover:opacity-100"
+                >
+                  Book Now
+                </button>
+              </Link>
             </div>
           </div>
         </div>

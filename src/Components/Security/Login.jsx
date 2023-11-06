@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 const Login = () => {
   const [error, setError] = useState(null);
-  const { loginWithEmail,loginWithGoogle } = useContext(AuthContext);
+  const { loginWithEmail, loginWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLoginWithEmail = (e) => {
@@ -24,23 +24,23 @@ const Login = () => {
       });
   };
 
-  const handleGoogleLogin=()=>{
+  const handleGoogleLogin = () => {
     setError(null);
     loginWithGoogle()
-    .then(()=>{
-        navigate("/")
-    })
-    .catch((error)=>{
-        setError(error.message)
-    })
-  }
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
 
   return (
     <div>
-      <div className="w-[95%] lg:h-[100vh] m-auto">
+      <div className="w-[90%] lg:h-[100vh] m-auto">
         <Navbar />
         <div className="grid justify-center items-center py-5">
-          <div className="flex flex-col lg:flex-row  justify-center gap-10 bg-blue-200 dark:bg-slate-700 rounded-lg p-3 lg:p-16 shadow-2xl">
+          <div className="flex flex-col lg:flex-row  justify-center gap-10 bg-white dark:bg-slate-700 rounded-lg p-3 lg:p-16 shadow-2xl">
             <div>
               <img
                 src={loginbg}
@@ -87,7 +87,10 @@ const Login = () => {
                   value="Submit"
                 />
               </form>
-              <button onClick={handleGoogleLogin} className="w-[90%] md:w-4/5 m-auto lg:m-0 px-4 py-3 lg:w-[30vw] bg-orange-300 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300">
+              <button
+                onClick={handleGoogleLogin}
+                className="w-[90%] md:w-4/5 m-auto lg:m-0 px-4 py-3 lg:w-[30vw] bg-orange-300 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300"
+              >
                 <GrGoogle className="text-xl m-auto" />
               </button>
               <p className="text-center font-semibold text-[17px]">
@@ -100,7 +103,7 @@ const Login = () => {
                 </Link>
               </p>
               <p className="text-center font-semibold text-[17px] text-orange-500">
-                { error && error }
+                {error && error}
               </p>
             </div>
           </div>

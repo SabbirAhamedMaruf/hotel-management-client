@@ -6,10 +6,10 @@ import Home from "../Components/Home/Home";
 import Login from "../Components/Security/Login";
 import Register from "../Components/Security/Register";
 import PrivateRoutes from "./PrivateRoutes";
-import Dashboard from "../Components/Dashboard/Dashboard";
 import Aboutus from "../Components/AboutUs/Aboutus";
 import Rooms from "../Components/Rooms/Rooms";
 import SingleRoomDetails from "../Components/Rooms/SingleRoomDetails";
+import Mybookings from "../Components/User/Mybookings";
 
 const routes = createBrowserRouter([
   {
@@ -30,8 +30,8 @@ const routes = createBrowserRouter([
         element:<Register/>
       },
       {
-        path:"/dashboard",
-        element:<PrivateRoutes><Dashboard/></PrivateRoutes>
+        path:"/mybookings",
+        element:<PrivateRoutes><Mybookings/></PrivateRoutes>
       },
       {
         path:"/aboutus",
