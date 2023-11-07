@@ -1,20 +1,52 @@
-// import { useState } from "react";
 import Navbar from "../Shared/Navbar";
+import useAxiosSeure from "../../Hooks/useAxiosSecure";
+import { useContext } from "react";
+import { NotificationContext } from "../../Hooks/Notification";
 
 const AddRoom = () => {
-//   const [error, setError] = useState(null);
+  const { handleSuccessToast, handleErrorToast } =
+    useContext(NotificationContext);
+  const axiosSecure = useAxiosSeure();
+  const handleAddRoom = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const photo = form.roomphoto.value;
+    const price = form.roomprice.value;
+    const featured = form.isfeatured.value;
+    const size = form.roomsize.value;
+    const description = form.roomdescription.value;
+    const available = true;
+
+
+
+
+    const currentRoomData = { photo, price, featured, size,available, description};
+
+    axiosSecure.post("/addroom", currentRoomData).then((res) => {
+      if (res.data.acknowledged) {
+        handleSuccessToast("Room information added successfully!");
+        form.reset();
+      } else {
+        handleErrorToast("An error occured. Please check connection!");
+      }
+    });
+  };
+
   return (
     <div>
       <div>
         <div>
           <div className="pb-10">
-            <Navbar />
-            <div className="w-[90%] p-4 lg:p-14 m-auto shadow-2xl rounded-lg my-14 bg0-white dark:bg-[#334155]">
-              <h1 className="text-center font-bold text-4xl py-8 ">
-                Add Room
-              </h1>
+            <div className="w-[90vw] m-auto">
+              <Navbar />
+            </div>
+            <div className="w-[90vw] p-4 lg:p-14 m-auto shadow-2xl rounded-lg my-14 bg-white dark:bg-[#334155]">
+              <h1 className="text-center font-bold text-4xl py-8 ">Add Room</h1>
               <div className="m-auto w-[80%] pb-8">
-                <form className="grid lg:grid-cols-2 gap-8 pt-12">
+                <form
+                  onSubmit={handleAddRoom}
+                  className="grid lg:grid-cols-2 gap-8 pt-12"
+                >
                   {/* Left side */}
                   <div className="grid lg:grid-cols-2 space-y-5">
                     {/* Photo */}
@@ -24,7 +56,7 @@ const AddRoom = () => {
                     <input
                       className="col-span-2 py-2 px-4 text-black bg-blue-100 rounded-md font-semibold outline-none"
                       type="text"
-                      name="photo"
+                      name="roomphoto"
                       required
                       placeholder="Enter your photo url"
                     />
@@ -36,7 +68,7 @@ const AddRoom = () => {
                     <input
                       className="col-span-2 py-2 px-4 text-black bg-blue-100 rounded-md font-semibold outline-none"
                       type="number"
-                      name="name"
+                      name="roomprice"
                       required
                       placeholder="Enter your room price"
                     />
@@ -46,7 +78,7 @@ const AddRoom = () => {
                       Is Featured?
                     </label>
                     <select
-                      name="featured"
+                      name="isfeatured"
                       required
                       className="col-span-2 py-2 px-4 text-black bg-blue-100 rounded-md font-semibold outline-none"
                     >
@@ -64,7 +96,7 @@ const AddRoom = () => {
                     <input
                       className="col-span-2 py-2 px-4 text-black bg-blue-100 rounded-md font-semibold outline-none"
                       type="number"
-                      name="warrenty"
+                      name="roomsize"
                       required
                       placeholder="Enter your room size"
                       min={0}
@@ -76,7 +108,7 @@ const AddRoom = () => {
                     </label>
                     <textarea
                       className="col-span-2 py-2 px-4 text-black bg-blue-100 rounded-md font-semibold outline-none"
-                      name="description"
+                      name="roomdescription"
                       cols="30"
                       rows="5"
                       placeholder="Enter your room description"

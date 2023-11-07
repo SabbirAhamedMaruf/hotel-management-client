@@ -1,9 +1,35 @@
 import Navbar from "../Shared/Navbar";
-import roombed from "../../assets/Images/rooms/rooms.jpg";
-import { Link } from "react-router-dom";
-import { PiEyeBold } from "react-icons/pi";
 import roombanner from "../../assets/Images/rooms/bg.jpg";
+import useAxiosSeure from "../../Hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
+import SingleRoom from "./SingleRoom";
+
+
+
 const Rooms = () => {
+  const [roomsData, setRoomData ] = useState([]);
+  const axiosSecure = useAxiosSeure();
+
+  // Filter
+  const handleFilter =()=>{
+    console.log("Hi there");
+  }
+
+
+  useEffect(()=>{
+    axiosSecure.get("/rooms")
+    .then(res => {
+      setRoomData(res.data)
+      console.log(res.data);
+    })
+  },[axiosSecure])
+
+
+
+
+
+
+
   return (
     <div>
       <div className="w-[90vw] m-auto">
@@ -27,39 +53,35 @@ const Rooms = () => {
 
         <div className="bg-blue-50 dark:bg-slate-900 py-10 lg:py-20">
           <div className="w-[90vw] m-auto flex flex-col lg:flex-row justify-center gap-5">
-            <div className="h-[10vw] lg:w-[20vw] lg:h-[66.2vh] lg:bg-[#212538] rounded-xl">
-              {/* TODO slider goes here */}
-              <div></div>
+            <div className="flex flex-col p-20 space-y-5 h-[10vw] lg:w-[20vw] lg:h-[66.2vh] lg:bg-[#212538] text-white rounded-xl">
+
+
+
+
+
+
+
+
+              <label htmlFor="range" className="text-3xl">Filter by price</label>
+              <select onChange={handleFilter} name="range" className="px-4 py-2 lg:py-2  bg-blue-100 rounded-md outline-none text-black font-semibold">
+                <option value="high">Low to high</option>
+                <option value="high">High to low</option>
+              </select>
+  
+
+
+
+
+
+
+
+
             </div>
 
             <div className="lg:w-[70vw] grid  md:grid-cols-2 lg:grid-cols-3 gap-5">
-
-
-
-              <div className="relative justify-self-center">
-                <img
-                  src={roombed}
-                  className="md:w-[50vw] md:h-[30vh] lg:w-[22vw]  lg:h-[32vh] object-cover rounded-xl"
-                />
-                <p className="absolute bottom-5 left-5 lg:text-xl font-semibold text-white">
-                  Price : 67$
-                </p>
-                <Link>
-                  <button className="md:w-[43.8vw] md:h-[30vh] lg:w-[22vw]  lg:h-[32vh] object-cover bg-black dark:bg-cyan-900 absolute inset-0 rounded-xl opacity-0 transition duration-700 ease-out hover:opacity-40 hover:dark:opacity-70 z-10">
-                    <PiEyeBold className="text-2xl md:text-3xl lg:text-5xl text-white dark:text-cyan-400 inline" />
-                  </button>
-                </Link>
-              </div>
-
-
-
-
-
-
-
-
-
-
+            {
+              roomsData?.map(i=><SingleRoom key={i._id} data={i}></SingleRoom>)
+            }
 
             </div>
 
