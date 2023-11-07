@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
       const payload = {"email":email};
       setUser(currentUser);
       setLoading(false);
-      console.log(currentUser);
+      // console.log(currentUser);
       if(currentUser){
         axiosSecure.post("/jwt",payload)
         .then(res => console.log(res.data))

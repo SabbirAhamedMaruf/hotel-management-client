@@ -11,7 +11,6 @@ import { useTheme } from "../../Hooks/useTheme";
 
 const Navbar = () => {
   const { user, handleUserSignOut } = useContext(AuthContext);
-  console.log(user);
   const { theme, changeTheme } = useTheme();
   return (
     <div>

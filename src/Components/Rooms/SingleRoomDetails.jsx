@@ -1,15 +1,33 @@
 import "../../index.css";
 import Navbar from "../Shared/Navbar";
 import roombanner from "../../assets/Images/rooms/bg.jpg";
-import bed1 from "../../assets/Images/banner/bed1.jpg";
 import { BsBuildingCheck, BsCurrencyDollar, BsPeople } from "react-icons/bs";
 import { LuBike } from "react-icons/Lu";
 import { ImGlass } from "react-icons/im";
 import { BiSwim } from "react-icons/bi";
 import { SlSizeFullscreen } from "react-icons/sl";
 import girl1 from "../../assets/Images/girl1.jpg";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import useAxiosSeure from "../../Hooks/useAxiosSecure";
 
 const SingleRoomDetails = () => {
+  const axiosSecure = useAxiosSeure();
+  const {id} = useParams();
+
+  const [currentRoomDetail ,setCurrentRoomDetail] = useState({});
+  const {description,photo,price,size} = currentRoomDetail || {};
+
+
+  useEffect(()=>{
+    axiosSecure.get(`/rooms/singleRoomDetails/${id}`)
+    .then(res => setCurrentRoomDetail(res.data))
+  },[axiosSecure,id])
+
+  console.log(currentRoomDetail);
+
+
+  console.log(id);
   return (
     <div>
       <div className="w-[90vw] m-auto">
@@ -36,7 +54,7 @@ const SingleRoomDetails = () => {
             <div className="flex flex-col md:flex-row items-center gap-10 w-[90vw] m-auto">
               <div>
                 <img
-                  src={bed1}
+                  src={photo}
                   className="md:w-[70vw] lg:w-[50vw] lg:h-[60vh] object-cover rounded-xl"
                 />
               </div>
@@ -74,12 +92,12 @@ const SingleRoomDetails = () => {
                   <div className="flex flex-col justify-center items-center">
                     <SlSizeFullscreen className="text-2xl md:text-3xl lg:text-4xl" />
                     <p className="md:text-xl lg:text-xl mt-1">
-                      1800 square feet
+                      {size} square feet
                     </p>
                   </div>
                   <div className="flex flex-col justify-center items-center">
                     <BsCurrencyDollar className="text-3xl md:text-4xl lg:text-5xl" />
-                    <p className="md:text-xl lg:text-xl">67$ per night</p>
+                    <p className="md:text-xl lg:text-xl">{price}$ per night</p>
                   </div>
                 </div>
 
@@ -102,19 +120,7 @@ const SingleRoomDetails = () => {
                 <div>
                   <h1 className="text-center text-3xl mt-6">Description</h1>
                   <p className="text-justify mt-2 text-normal lg:font-semibold lg:p-5 rounded-xl">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nisi doloribus illum dignissimos debitis repellendus sunt,
-                    aperiam, officiis, fuga dolores delectus magni. Inventore
-                    veniam harum ea omnis incidunt rerum numquam commodi facilis
-                    unde accusamus eveniet quis dicta tenetur vitae quia aut
-                    officia, possimus ipsum dolore recusandae suscipit at saepe?
-                    Consequuntur saepe ipsa impedit sit quas dolorem iure
-                    accusamus delectus voluptatum iusto, animi veritatis,
-                    recusandae placeat error dolorum beatae voluptates ab quidem
-                    ad. Omnis delectus beatae eos repellat, vel enim sapiente
-                    modi laboriosam molestiae labore maxime cupiditate porro ad
-                    in corporis, inventore quam officia ea error. Autem ipsum
-                    nam quis voluptates itaque.
+                    {description}
                   </p>
                 </div>
               </div>

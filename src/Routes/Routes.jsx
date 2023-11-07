@@ -43,14 +43,13 @@ const routes = createBrowserRouter([
         element:<Rooms/>
       },
       {
-        path:"/addroom",
-        element:<PrivateRoutes><AddRoom/></PrivateRoutes>
+        path:"/rooms/:id",
+        element:<SingleRoomDetails/>
       },
       {
-        path:"/rooms/singleroomdetails",
-        element:<SingleRoomDetails/>
+        path:"/addroom",
+        element:<PrivateRoutes><AddRoom/></PrivateRoutes>
       }
-
     ],
   },
 ]);
