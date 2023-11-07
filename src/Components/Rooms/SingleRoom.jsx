@@ -16,13 +16,9 @@ const SingleRoom = ({ data }) => {
           <p className="absolute bottom-5 left-5 lg:text-xl font-semibold text-white">
             Price : {price}$
           </p>
-          {reviewCount > 0 ? (
             <p className="absolute bottom-5 right-5 lg:text-xl font-semibold text-white">
               Review : {reviewCount}
             </p>
-          ) : (
-            ""
-          )}
         </div>
         <Link to={`/rooms/${_id}`}>
           <button className="md:w-[43.8vw] md:h-[30vh] lg:w-[22vw]  lg:h-[32vh] object-cover bg-black dark:bg-cyan-900 absolute inset-0 rounded-xl opacity-0 transition duration-700 ease-out hover:opacity-40 hover:dark:opacity-70 z-10">

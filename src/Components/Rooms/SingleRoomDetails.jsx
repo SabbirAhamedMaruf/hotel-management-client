@@ -11,14 +11,58 @@ import { Link, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import useAxiosSeure from "../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { NotificationContext } from "../../Hooks/Notification";
 
 const SingleRoomDetails = () => {
   const [currentRoomDetail, setCurrentRoomDetail] = useState({});
+  const { handleSuccessToast, handleErrorToast } =
+    useContext(NotificationContext);
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSeure();
   const { id } = useParams();
 
   const { description, photo, price, size } = currentRoomDetail || {};
+
+  // Booking date
+  const [bookingDate, handleBookingDate] = useState(null);
+
+  const handleDateChange = (e) => {
+    handleBookingDate(e.target.value);
+  };
+
+  // Handle Modal Interaction
+  const handleModalOpen = () => {
+    if (bookingDate === null) {
+      handleErrorToast("Date field is emapty!");
+    } else {
+      document.getElementById("my_modal_5").showModal();
+    }
+  };
+
+  // handleBooking
+  const handleConfimBooking = () => {
+    const date = bookingDate;
+    const roomId = currentRoomDetail._id;
+    const roomPrice = currentRoomDetail.price;
+    const roomPhoto = currentRoomDetail.photo;
+
+    const bookingData = { date, roomId, roomPrice, roomPhoto };
+
+    console.log(bookingData);
+    axiosSecure
+      .patch(`/rooms/singleRoomDetails/bookRoom?user=${user.email}`, {
+        bookingData,
+      })
+      .then((res) => {
+        if (res.data.acknowledged) {
+          handleSuccessToast("Room Booked successfully!");
+        } else {
+          handleErrorToast(
+            "An error occured. Please check internet conneciton!"
+          );
+        }
+      });
+  };
 
   useEffect(() => {
     axiosSecure
@@ -26,7 +70,6 @@ const SingleRoomDetails = () => {
       .then((res) => setCurrentRoomDetail(res.data));
   }, [axiosSecure, id]);
 
-  console.log(id);
   return (
     <div>
       <div className="w-[90vw] m-auto">
@@ -59,24 +102,71 @@ const SingleRoomDetails = () => {
               </div>
               <div className="bg-[#212538] text-white w-full md:w-[30vw] h-[15vh] md:h-[35vh] lg:w-[40vw] lg:h-[60vh] rounded-xl">
                 <div>
-                  <form className="flex justify-center items-center md:items-start flex-row md:flex-col space-x-5 md:space-x-0 md:space-y-10 lg:space-y-24 h-full p-11 lg:p-20">
+                  <div className="flex justify-center items-center md:items-start flex-row md:flex-col space-x-5 md:space-x-0 md:space-y-10 lg:space-y-24 h-full p-11 lg:p-20">
                     <div className="flex flex-col md:gap-10 lg:gap-20">
                       <label className="lg:text-4xl" htmlFor="checkin">
                         <BsBuildingCheck className="inline" /> Check In
                       </label>
+
                       <input
+                        onChange={handleDateChange}
                         className="bg-[#212538] lg:text-xl  outline-none"
                         type="date"
                         name="checkin"
                         required
                       />
                     </div>
+
                     {user ? (
-                      <input
-                        className="p-2 lg:w-[30vw] lg:py-2 bg-orange-300 rounded-md outline-none text-black font-semibold lg:text-xl duration-700 hover:bg-green-300"
-                        type="submit"
-                        value="Book Now"
-                      />
+                      // <input
+                      //   className="p-2 lg:w-[30vw] lg:py-2 bg-orange-300 rounded-md outline-none text-black font-semibold lg:text-xl duration-700 hover:bg-green-300"
+                      //   type="submit"
+                      //   value="Book Now"
+                      // />
+
+                      <div>
+                        <button
+                          className="p-2 lg:w-[30vw] lg:py-2 bg-orange-300 rounded-md outline-none text-black font-semibold lg:text-xl duration-700 hover:bg-green-300"
+                          onClick={() => handleModalOpen()}
+                        >
+                          Book Now
+                        </button>
+                        <dialog
+                          id="my_modal_5"
+                          className="modal modal-bottom sm:modal-middle"
+                        >
+                          <div className="modal-box bg-white text-black">
+                            <h3 className="font-bold text-2xl">
+                              Confirm Booking
+                            </h3>
+
+                            {/* Data Field */}
+                            <div className="mt-10 font-semibold">
+                              <p>Booking Data : {bookingDate}</p>
+                              <p>Room Price : {currentRoomDetail.price}</p>
+                              <p>Room Size : {currentRoomDetail.size}</p>
+                            </div>
+
+                            <div className="modal-action">
+                              <form
+                                method="dialog"
+                                className="flex justify-between gap-4"
+                              >
+                                {/* if there is a button in form, it will close the modal */}
+                                <button
+                                  onClick={handleConfimBooking}
+                                  className="w-full p-4 bg-green-400 text-white font-semibold rounded-xl "
+                                >
+                                  Confrim
+                                </button>
+                                <button className="w-full p-4 bg-red-400 text-white font-semibold rounded-xl ">
+                                  Close
+                                </button>
+                              </form>
+                            </div>
+                          </div>
+                        </dialog>
+                      </div>
                     ) : (
                       <Link to="/login">
                         <input
@@ -86,7 +176,7 @@ const SingleRoomDetails = () => {
                         />
                       </Link>
                     )}
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>

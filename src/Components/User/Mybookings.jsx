@@ -1,8 +1,25 @@
 import Navbar from "../Shared/Navbar";
 import roombanner from "../../assets/Images/rooms/bg.jpg";
 import bed1 from "../../assets/Images/banner/bed1.jpg";
+import useAxiosSeure from "../../Hooks/useAxiosSecure";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Mybookings = () => {
+  const [userBookedRooms , setUserBookedRooms] = useState([]);
+  const {user} = useContext(AuthContext);
+  const userEmail = user.email;
+  console.log(userEmail);
+  const axiosSecure = useAxiosSeure();
+
+
+  useEffect(()=>{
+    axiosSecure.post("/mybookings",{userEmail})
+    .then(res=>setUserBookedRooms(res.data))
+  },[axiosSecure,userEmail])
+
+
+
   return (
     <div>
       <div className="w-[90vw] m-auto">
