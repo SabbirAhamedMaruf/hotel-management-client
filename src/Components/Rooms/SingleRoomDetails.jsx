@@ -153,4 +153,4 @@ const SingleRoomDetails = () => {
 
 export default SingleRoomDetails;
 
-// TODO use date picker package from react dont use date input
+// TODO add review comment inside detail page

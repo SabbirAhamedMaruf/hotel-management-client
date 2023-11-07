@@ -8,21 +8,28 @@ import SingleRoom from "./SingleRoom";
 
 const Rooms = () => {
   const [roomsData, setRoomData ] = useState([]);
+  const [sortByHighToLow, setSortByHighToLow] = useState(true);
   const axiosSecure = useAxiosSeure();
 
+
   // Filter
-  const handleFilter =()=>{
-    console.log("Hi there");
+  const handleFilter =(e)=>{
+    if(e.target.value === "high"){
+      setSortByHighToLow(true);
+    }else{
+      setSortByHighToLow(false)
+    }
   }
 
 
+
   useEffect(()=>{
-    axiosSecure.get("/rooms")
+    axiosSecure.get(`/rooms?sortByHighToLow=${sortByHighToLow}`)
     .then(res => {
       setRoomData(res.data)
       console.log(res.data);
     })
-  },[axiosSecure])
+  },[axiosSecure,sortByHighToLow])
 
 
 
@@ -64,8 +71,8 @@ const Rooms = () => {
 
               <label htmlFor="range" className="text-3xl">Filter by price</label>
               <select onChange={handleFilter} name="range" className="px-4 py-2 lg:py-2  bg-blue-100 rounded-md outline-none text-black font-semibold">
-                <option value="high">Low to high</option>
                 <option value="high">High to low</option>
+                <option value="low">Low to high</option>
               </select>
   
 

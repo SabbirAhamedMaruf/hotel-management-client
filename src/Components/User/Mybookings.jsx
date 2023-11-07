@@ -24,10 +24,10 @@ const Mybookings = () => {
               Your Bookings
             </h1>
           </div>
-          <div className="bg-blue-50 dark:bg-slate-900 py-10 ">
+          <div className="bg-blue-50 dark:bg-slate-900">
             <div className="w-[90vw] m-auto">
               <div className="overflow-x-auto">
-                <table className="table text-center lg:text-xl">
+                <table className="table text-center lg:text-xl mt-20 mb-96 md:mb-80 lg:mb-36">
                   {/* head */}
                   <thead className="lg:text-xl">
                     <tr>
@@ -271,6 +271,5 @@ const Mybookings = () => {
 };
 
 export default Mybookings;
-
 
 // TODO add a hight within a if else condition like if booking is 1 then h-[100vh] otherwise h-auto
