@@ -10,6 +10,7 @@ import Aboutus from "../Components/AboutUs/Aboutus";
 import Rooms from "../Components/Rooms/Rooms";
 import SingleRoomDetails from "../Components/Rooms/SingleRoomDetails";
 import Mybookings from "../Components/User/Mybookings";
+import AddRoom from "../Components/User/AddRoom";
 
 const routes = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const routes = createBrowserRouter([
       {
         path:"/rooms",
         element:<Rooms/>
+      },
+      {
+        path:"/addroom",
+        element:<PrivateRoutes><AddRoom/></PrivateRoutes>
       },
       {
         path:"/rooms/singleroomdetails",

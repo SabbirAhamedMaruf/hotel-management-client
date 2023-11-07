@@ -8,6 +8,7 @@ import AboutUsSectionGirl from "../../assets/Images/girl.jpg";
 import hotelreview from "../../assets/Images/hotelreview.jpg";
 import Banner from "./Banner";
 import Testimonials from "./Testimonials";
+import TermsAndPrivacyPolicy from "../Shared/TermsAndPrivacyPolicy";
 const Home = () => {
   return (
     <div>
@@ -78,7 +79,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-
+      <div id="terms" className="my-20">
+        <TermsAndPrivacyPolicy/>
+      </div>
       <Footer />
     </div>
   );

@@ -32,10 +32,10 @@ const UserNavbar = () => {
             <MdPayment className="inline text-xl mr-2" />
             <span>Payment Options</span>
           </Link>
-          <Link className="flex items-center hover:text-cyan-400">
+          <button className="flex items-center hover:text-cyan-400">
             <CgNotes className="inline text-xl mr-2" />
             <span>Terms and Conditions</span>
-          </Link>
+          </button>
         </div>
 
         <div className="justify-self-end flex items-center space-x-5">
@@ -72,3 +72,6 @@ const UserNavbar = () => {
 };
 
 export default UserNavbar;
+
+
+// TODO create clicking option of terms and condition. By click terms and condition text on navbar to go terms and condition section
