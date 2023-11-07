@@ -14,7 +14,7 @@ const Testimonials = () => {
       .then((result) => setTestimonialData(result.data));
   }, [axiosSecure]);
 
-  console.log(testimonialData);
+
   return (
     <div className="w-full">
       <Marquee speed={100}>

@@ -27,7 +27,6 @@ const Rooms = () => {
     axiosSecure.get(`/rooms?sortByHighToLow=${sortByHighToLow}`)
     .then(res => {
       setRoomData(res.data)
-      console.log(res.data);
     })
   },[axiosSecure,sortByHighToLow])
 

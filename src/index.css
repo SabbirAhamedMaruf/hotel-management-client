@@ -17,8 +17,3 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-
-.roomDetailTestimonial{
-  overflow-y: hidden; /* Hide vertical scrollbar */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-}

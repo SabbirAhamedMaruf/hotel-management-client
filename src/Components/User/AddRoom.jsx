@@ -11,16 +11,22 @@ const AddRoom = () => {
     e.preventDefault();
     const form = e.target;
     const photo = form.roomphoto.value;
-    const price = form.roomprice.value;
-    const featured = form.isfeatured.value;
-    const size = form.roomsize.value;
+    const price = parseInt(form.roomprice.value);
+    const featured = Boolean(form.isfeatured.value);
+    const size = parseInt(form.roomsize.value);
     const description = form.roomdescription.value;
     const available = true;
+    const lastbookDate = "";
 
-
-
-
-    const currentRoomData = { photo, price, featured, size,available, description};
+    const currentRoomData = {
+      photo,
+      price,
+      featured,
+      size,
+      available,
+      lastbookDate,
+      description,
+    };
 
     axiosSecure.post("/addroom", currentRoomData).then((res) => {
       if (res.data.acknowledged) {

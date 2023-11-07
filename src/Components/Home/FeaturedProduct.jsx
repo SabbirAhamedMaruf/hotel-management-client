@@ -12,7 +12,6 @@ const FeaturedProduct = () => {
       .then((res) => setFeatuedProduct(res.data));
   }, [axiosSecure]);
 
-  console.log(featuedProduct);
   return (
     <div className="m-auto w-[90%] lg:w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {featuedProduct.map((i) => (
