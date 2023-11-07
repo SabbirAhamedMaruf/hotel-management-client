@@ -7,25 +7,24 @@ import { ImGlass } from "react-icons/im";
 import { BiSwim } from "react-icons/bi";
 import { SlSizeFullscreen } from "react-icons/sl";
 import girl1 from "../../assets/Images/girl1.jpg";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import useAxiosSeure from "../../Hooks/useAxiosSecure";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const SingleRoomDetails = () => {
+  const [currentRoomDetail, setCurrentRoomDetail] = useState({});
+  const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSeure();
-  const {id} = useParams();
+  const { id } = useParams();
 
-  const [currentRoomDetail ,setCurrentRoomDetail] = useState({});
-  const {description,photo,price,size} = currentRoomDetail || {};
+  const { description, photo, price, size } = currentRoomDetail || {};
 
-
-  useEffect(()=>{
-    axiosSecure.get(`/rooms/singleRoomDetails/${id}`)
-    .then(res => setCurrentRoomDetail(res.data))
-  },[axiosSecure,id])
-
-  console.log(currentRoomDetail);
-
+  useEffect(() => {
+    axiosSecure
+      .get(`/rooms/singleRoomDetails/${id}`)
+      .then((res) => setCurrentRoomDetail(res.data));
+  }, [axiosSecure, id]);
 
   console.log(id);
   return (
@@ -72,11 +71,21 @@ const SingleRoomDetails = () => {
                         required
                       />
                     </div>
-                    <input
-                      className="p-2 lg:w-full lg:py-2 bg-orange-300 rounded-md outline-none text-black font-semibold lg:text-xl duration-700 hover:bg-green-300"
-                      type="submit"
-                      value="Book Now"
-                    />
+                    {user ? (
+                      <input
+                        className="p-2 lg:w-[30vw] lg:py-2 bg-orange-300 rounded-md outline-none text-black font-semibold lg:text-xl duration-700 hover:bg-green-300"
+                        type="submit"
+                        value="Book Now"
+                      />
+                    ) : (
+                      <Link to="/login">
+                        <input
+                          className="p-2 lg:w-[30vw] lg:py-2 bg-orange-300 rounded-md outline-none text-black font-semibold lg:text-xl duration-700 hover:bg-green-300"
+                          type="submit"
+                          value="Login here to book"
+                        />
+                      </Link>
+                    )}
                   </form>
                 </div>
               </div>

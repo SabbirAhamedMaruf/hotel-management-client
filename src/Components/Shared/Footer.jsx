@@ -15,7 +15,7 @@ const Footer = () => {
               Ilk Lodge
             </h1>
           </Link>
-          <div className="flex items-center gap-4 mt-5">
+          <div className="flex items-center gap-4 ml-28 md:ml-0 mt-5">
             <Link>
               <GrFacebook className="text-4xl p-2 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-full text-white" />
             </Link>
