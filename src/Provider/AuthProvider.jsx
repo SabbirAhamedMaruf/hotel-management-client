@@ -39,18 +39,44 @@ const AuthProvider = ({ children }) => {
     signOut(auth);
   };
 
+
+
+
+
+
+
+
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       const email = currentUser?.email || user?.email;
       const payload = {"email":email};
       setUser(currentUser);
       setLoading(false);
-      // console.log(currentUser);
       if(currentUser){
         axiosSecure.post("/jwt",payload)
         .then(res => console.log(res.data))
+      }else{
+        axiosSecure.post("/clearuserjwttoken", payload)
+        .then(result => console.log(result.data))
       }
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
     return () => unsubscribe();
   }, [axiosSecure,user]);
 

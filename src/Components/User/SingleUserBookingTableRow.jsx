@@ -46,7 +46,7 @@ const SingleUserBookingTableRow = ({ data }) => {
     if (reviewText === null) {
       handleErrorToast("Please add some review text!");
     } else {
-      axiosSecure.patch("/addreview", reviewData).then((res) => {
+      axiosSecure.patch(`/addreview?userEmail=${user.email}`, reviewData).then((res) => {
         if (res.data.acknowledged) {
           handleSuccessToast("Review added successfully!");
           setShowReviewModal(false);
@@ -71,7 +71,7 @@ const SingleUserBookingTableRow = ({ data }) => {
     } else {
       axiosSecure
         .patch(
-          `/updateBookedDate?newDate=${newDate}&bookedId=${id}&roomId=${roomId}`
+          `/updateBookedDate?newDate=${newDate}&bookedId=${id}&roomId=${roomId}&userEmail=${user.email}`
         )
         .then((res) => {
           if (res.data.acknowledged) {
@@ -91,7 +91,7 @@ const SingleUserBookingTableRow = ({ data }) => {
       handleErrorToast("User can cancel booking 1 day before booked date!");
     } else {
       axiosSecure
-        .delete(`/deletebookedroom?id=${id}&roomId=${roomId}`)
+        .delete(`/deletebookedroom?id=${id}&roomId=${roomId}&userEmail=${user.email}`)
         .then((res) => {
           if (res.data.acknowledged) {
             handleSuccessToast("Order cancelelled successfully!");

@@ -2,8 +2,10 @@ import Navbar from "../Shared/Navbar";
 import useAxiosSeure from "../../Hooks/useAxiosSecure";
 import { useContext } from "react";
 import { NotificationContext } from "../../Hooks/Notification";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const AddRoom = () => {
+  const {user} = useContext(AuthContext);
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const axiosSecure = useAxiosSeure();
@@ -28,7 +30,7 @@ const AddRoom = () => {
       description,
     };
 
-    axiosSecure.post("/addroom", currentRoomData).then((res) => {
+    axiosSecure.post(`/addroom?userEmail=${user.email}`, currentRoomData).then((res) => {
       if (res.data.acknowledged) {
         handleSuccessToast("Room information added successfully!");
         form.reset();
