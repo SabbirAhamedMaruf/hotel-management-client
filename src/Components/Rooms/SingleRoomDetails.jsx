@@ -15,7 +15,7 @@ import { Helmet } from "react-helmet";
 
 const SingleRoomDetails = () => {
   const [currentRoomDetail, setCurrentRoomDetail] = useState([]);
-  const [fetch,setFetch] = useState(true);
+  const [fetch, setFetch] = useState(true);
   const [currentRoomReviews, setCurrentRoomReviews] = useState([]);
 
   const { handleSuccessToast, handleErrorToast } =
@@ -24,7 +24,7 @@ const SingleRoomDetails = () => {
   const axiosSecure = useAxiosSeure();
   const { id } = useParams();
 
-  const { available, description, photo, price, size } =
+  const { available, description, photo, price, size, offer } =
     currentRoomDetail || {};
 
   // Booking date
@@ -60,7 +60,7 @@ const SingleRoomDetails = () => {
       .then((res) => {
         if (res.data.acknowledged) {
           handleSuccessToast("Room Booked successfully!");
-          setFetch(!fetch)
+          setFetch(!fetch);
         } else {
           handleErrorToast(
             "An error occured. Please check internet conneciton!"
@@ -75,9 +75,7 @@ const SingleRoomDetails = () => {
       setCurrentRoomDetail(res.data.roomData);
       setCurrentRoomReviews(res.data.reviews);
     });
-  }, [axiosSecure, id,fetch]);
-
-
+  }, [axiosSecure, id, fetch]);
 
   return (
     <div>
@@ -107,11 +105,21 @@ const SingleRoomDetails = () => {
 
           <div className="bg-blue-50 dark:bg-slate-900 py-10 lg:py-20">
             <div className="flex flex-col md:flex-row items-center gap-10 w-[90vw] m-auto">
-              <div>
+              <div className="relative">
                 <img
                   src={photo}
                   className="md:w-[70vw] lg:w-[50vw] lg:h-[60vh] object-cover rounded-xl"
                 />
+                {offer === "none" ? (
+                  <div></div>
+                ) : (
+                  <div>
+                    <div className="absolute bottom-0 w-full h-[5vh] lg:h-[7vh] bg-black opacity-30 z-10"></div>
+                    <div className="absolute bottom-2 lg:bottom-5 left-5 z-30">
+                      <p className="lg:text-2xl text-white">{offer}</p>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="bg-[#212538] text-white w-full md:w-[30vw] h-[25vh] md:h-[35vh] lg:w-[40vw] lg:h-[60vh] rounded-xl">
                 <div>
@@ -203,6 +211,7 @@ const SingleRoomDetails = () => {
 
             <div className="w-[90vw] m-auto py-10 flex flex-col lg:flex-row gap-10 justify-between text-gray-600 dark:text-white">
               <div className="lg:w-[50vw]">
+                <h1 className="text-center text-3xl mt-6"> Room Description</h1>
                 <div className="grid grid-cols-3 text-center  py-5  rounded-xl">
                   <div className="flex flex-col justify-center items-center">
                     <BsPeople className="text-3xl md:text-4xl lg:text-5xl" />
@@ -245,9 +254,13 @@ const SingleRoomDetails = () => {
               </div>
 
               <div className="roomDetailTestimonial w-[90vw] lg:h-[61vh] lg:w-[40vw]  rounded-xl  space-y-3">
-                {currentRoomReviews.map((i) => (
-                  <SingleRoomReviews key={i._id} data={i}></SingleRoomReviews>
-                ))}
+                {currentRoomReviews.length === 0 ? (
+                  <p className="text-center lg:text-left">Add your reviews</p>
+                ) : (
+                  currentRoomReviews.map((i) => (
+                    <SingleRoomReviews key={i._id} data={i}></SingleRoomReviews>
+                  ))
+                )}
               </div>
             </div>
           </div>
