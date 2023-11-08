@@ -14,7 +14,6 @@ const SingleUserBookingTableRow = ({ data }) => {
     useContext(NotificationContext);
   const { date, roomId, roomPrice, roomPhoto } = data.currentRoomData || {};
 
-
   //   Code for review funtionality
   // my modal
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -34,10 +33,6 @@ const SingleUserBookingTableRow = ({ data }) => {
   const handleUserRating = (e) => {
     setUserRating(e.target.value);
   };
-
-
-
-
 
   const handleSendReviewText = (id) => {
     const reviewData = {
@@ -62,11 +57,6 @@ const SingleUserBookingTableRow = ({ data }) => {
     }
   };
 
-
-
-
-
-
   //   Code for update date funtionality
   const [newDate, setNewDate] = useState(date);
   // my modal
@@ -86,7 +76,7 @@ const SingleUserBookingTableRow = ({ data }) => {
         .then((res) => {
           if (res.data.acknowledged) {
             handleSuccessToast("Booked date updated successfully!");
-            setShowReviewModal(false);
+            setShowUpdateModal(false);
           } else {
             handleErrorToast("An error occured. Please check connection!");
           }
@@ -95,6 +85,7 @@ const SingleUserBookingTableRow = ({ data }) => {
   };
 
   //   Code for Delete booking funtionality
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
   const handleDeleteBookedRoom = (id, roomId) => {
     if (moment(date, "YYYY-MM-DD").diff(moment(), "days") < 1) {
       handleErrorToast("User can cancel booking 1 day before booked date!");
@@ -104,6 +95,7 @@ const SingleUserBookingTableRow = ({ data }) => {
         .then((res) => {
           if (res.data.acknowledged) {
             handleSuccessToast("Order cancelelled successfully!");
+            setShowDeleteModal(false);
           } else {
             handleErrorToast("An error occured. Please check connection!");
           }
@@ -121,11 +113,9 @@ const SingleUserBookingTableRow = ({ data }) => {
       <td>{roomPrice}$</td>
       <td>{date}</td>
 
-
       {/* Review */}
       <td>
         <div>
-
           {/* My Custom Modal */}
           <button
             className="p-1 lg:px-2 lg:py-2 bg-green-400 text-white rounded-md border-2 border-transparent hover:border-white"
@@ -184,58 +174,53 @@ const SingleUserBookingTableRow = ({ data }) => {
         </div>
       </td>
 
-
-
-
       {/* Update */}
       <td>
-
-      <div>
-
-{/* My Custom Modal */}
-<button
-  className="p-1 lg:px-2 lg:py-2 bg-orange-400 text-white rounded-md border-2 border-transparent hover:border-white"
-  onClick={() => setShowUpdateModal(true)}
->
-  Update
-</button>
-{showUpdateModal && (
-  <div>
-    <div className="fixed inset-0 bg-[rgba(189,189,189,0.4)] z-10">
-      <div className="fixed top-[35%] left-[35%] p-10 space-y-10 bg-white dark:bg-[#212538] rounded-xl ">
-        <h3 className="font-bold text-2xl text-left">
-          How was your experience
-        </h3>
         <div>
-          <form method="dialog" className="flex flex-col space-y-5">
-          <input
-                    onChange={handleNewDateChange}
-                    defaultValue={date}
-                    className="py-2 px-4 w-[24vw] text-[17px] bg-blue-50 text-black font-semibold rounded-md outline-none"
-                    type="date"
-                    name="updateDate"
-                  />
-          </form>
-        </div>
-        <div className="flex justify-center gap-10">
+          {/* My Custom Modal */}
           <button
-            onClick={() => handleUpdateBookedDate(data._id, roomId)}
-            className="p-2 bg-orange-300 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300"
+            className="p-1 lg:px-2 lg:py-2 bg-orange-400 text-white rounded-md border-2 border-transparent hover:border-white"
+            onClick={() => setShowUpdateModal(true)}
           >
-            Send
+            Update
           </button>
-          <button
-            onClick={() => setShowUpdateModal(false)}
-            className="p-2 bg-red-500 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300"
-          >
-            Close
-          </button>
+          {showUpdateModal && (
+            <div>
+              <div className="fixed inset-0 bg-[rgba(189,189,189,0.4)] z-10">
+                <div className="fixed top-[35%] left-[35%] p-10 space-y-10 bg-white dark:bg-[#212538] rounded-xl ">
+                  <h3 className="font-bold text-2xl text-left">
+                    How was your experience
+                  </h3>
+                  <div>
+                    <form method="dialog" className="flex flex-col space-y-5">
+                      <input
+                        onChange={handleNewDateChange}
+                        defaultValue={date}
+                        className="py-2 px-4 w-[24vw] text-[17px] bg-blue-50 text-black font-semibold rounded-md outline-none"
+                        type="date"
+                        name="updateDate"
+                      />
+                    </form>
+                  </div>
+                  <div className="flex justify-center gap-10">
+                    <button
+                      onClick={() => handleUpdateBookedDate(data._id, roomId)}
+                      className="p-2 bg-orange-300 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300"
+                    >
+                      Send
+                    </button>
+                    <button
+                      onClick={() => setShowUpdateModal(false)}
+                      className="p-2 bg-red-500 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      </div>
-    </div>
-  </div>
-)}
-</div>
 
 
 
@@ -249,7 +234,6 @@ const SingleUserBookingTableRow = ({ data }) => {
 
 
         <div>
- 
           <dialog id="update" className="modal modal-bottom sm:modal-middle">
             <div className="modal-box bg-white dark:bg-[#212538] text-black dark:text-white h-[50vh]">
               <h3 className="font-bold text-2xl">Update booking date</h3>
@@ -258,8 +242,6 @@ const SingleUserBookingTableRow = ({ data }) => {
                   method="dialog"
                   className="flex flex-col justify-center space-y-60"
                 >
-                  
-
                   {/* if there is a button in form, it will close the modal */}
                   <div className="flex justify-center gap-10">
                     <button
@@ -279,40 +261,54 @@ const SingleUserBookingTableRow = ({ data }) => {
         </div>
       </td>
 
+
+
+
+
+
+
+
+
       {/* Delete */}
       <td>
-        <div>
+
+      <div>
+          {/* My Custom Modal */}
           <button
             className="p-1 lg:px-2 lg:py-2 bg-red-500 text-white rounded-md border-2 border-transparent hover:border-white"
-            onClick={() => document.getElementById("delete").showModal()}
+            onClick={() => setShowDeleteModal(true)}
           >
             Delete
           </button>
-          <dialog id="delete" className="modal modal-bottom sm:modal-middle">
-            <div className="modal-box bg-white dark:bg-[#212538] text-black dark:text-white">
-              <h3 className="font-bold text-2xl text-left">
-                Delete booked room?
-              </h3>
-
-              <div className="modal-action justify-start">
-                <form method="dialog" className="flex flex-col space-y-5">
-                  {/* if there is a button in form, it will close the modal */}
-                  <div className="px-40 pt-10 flex justify-center gap-10">
+          {showDeleteModal && (
+            <div>
+              <div className="fixed inset-0 bg-[rgba(189,189,189,0.4)] z-10">
+                <div className="fixed top-[35%] left-[35%] p-10 space-y-10 bg-white dark:bg-[#212538] rounded-xl ">
+                  <h3 className="font-bold text-2xl text-left">
+                   Delete booked room?
+                  </h3>
+                  <div className="flex justify-center gap-10">
                     <button
                       onClick={() => handleDeleteBookedRoom(data._id, roomId)}
                       className="px-4 py-2 bg-orange-300 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300"
                     >
                       Yes
                     </button>
-                    <button className="px-4 py-2 bg-red-500 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300">
+                    <button
+                      onClick={() => setShowDeleteModal(false)}
+                      className="px-4 py-2 bg-red-500 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300"
+                    >
                       No
                     </button>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
-          </dialog>
+          )}
         </div>
+
+
+
       </td>
     </tr>
   );
