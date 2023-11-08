@@ -14,11 +14,10 @@ const SingleUserBookingTableRow = ({ data }) => {
     useContext(NotificationContext);
   const { date, roomId, roomPrice, roomPhoto } = data.currentRoomData || {};
 
-  console.log("Room Id", roomId);
 
   //   Code for review funtionality
   // my modal
-  const [showModal, setShowModal] = useState(false);
+  const [showReviewModal, setShowReviewModal] = useState(false);
 
   // getting date for review text
   const reviewTime = new Date();
@@ -55,7 +54,7 @@ const SingleUserBookingTableRow = ({ data }) => {
       axiosSecure.patch("/addreview", reviewData).then((res) => {
         if (res.data.acknowledged) {
           handleSuccessToast("Review added successfully!");
-          setShowModal(false);
+          setShowReviewModal(false);
         } else {
           handleErrorToast("An error occured. Please check connection!");
         }
@@ -70,7 +69,8 @@ const SingleUserBookingTableRow = ({ data }) => {
 
   //   Code for update date funtionality
   const [newDate, setNewDate] = useState(date);
-
+  // my modal
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   const handleNewDateChange = (e) => {
     setNewDate(e.target.value);
   };
@@ -86,6 +86,7 @@ const SingleUserBookingTableRow = ({ data }) => {
         .then((res) => {
           if (res.data.acknowledged) {
             handleSuccessToast("Booked date updated successfully!");
+            setShowReviewModal(false);
           } else {
             handleErrorToast("An error occured. Please check connection!");
           }
@@ -128,14 +129,14 @@ const SingleUserBookingTableRow = ({ data }) => {
           {/* My Custom Modal */}
           <button
             className="p-1 lg:px-2 lg:py-2 bg-green-400 text-white rounded-md border-2 border-transparent hover:border-white"
-            onClick={() => setShowModal(true)}
+            onClick={() => setShowReviewModal(true)}
           >
             Review
           </button>
-          {showModal && (
+          {showReviewModal && (
             <div>
               <div className="fixed inset-0 bg-[rgba(189,189,189,0.4)] z-10">
-                <div className="fixed top-[35%] left-[35%] p-10 space-y-10 bg-white  rounded-xl text-4xl">
+                <div className="fixed top-[35%] left-[35%] p-10 space-y-10 bg-white dark:bg-[#212538] rounded-xl ">
                   <h3 className="font-bold text-2xl text-left">
                     How was your experience
                   </h3>
@@ -155,7 +156,7 @@ const SingleUserBookingTableRow = ({ data }) => {
 
                       <input
                         onChange={handleSetReviewText}
-                        className="py-2 px-4 w-[24vw] text-[17px] bg-blue-50 text-black font-semibold rounded-md outline-none"
+                        className="py-2 px-4 w-[24vw] text-[17px] bg-blue-50 dark:bg-[#323856] text-black font-semibold rounded-md outline-none"
                         type="text"
                         name="review"
                         placeholder="Write a review"
@@ -170,7 +171,7 @@ const SingleUserBookingTableRow = ({ data }) => {
                       Send
                     </button>
                     <button
-                      onClick={() => setShowModal(false)}
+                      onClick={() => setShowReviewModal(false)}
                       className="p-2 bg-red-500 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300"
                     >
                       Close
@@ -186,42 +187,69 @@ const SingleUserBookingTableRow = ({ data }) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       {/* Update */}
       <td>
-        {" "}
+
+      <div>
+
+{/* My Custom Modal */}
+<button
+  className="p-1 lg:px-2 lg:py-2 bg-orange-400 text-white rounded-md border-2 border-transparent hover:border-white"
+  onClick={() => setShowUpdateModal(true)}
+>
+  Update
+</button>
+{showUpdateModal && (
+  <div>
+    <div className="fixed inset-0 bg-[rgba(189,189,189,0.4)] z-10">
+      <div className="fixed top-[35%] left-[35%] p-10 space-y-10 bg-white dark:bg-[#212538] rounded-xl ">
+        <h3 className="font-bold text-2xl text-left">
+          How was your experience
+        </h3>
         <div>
+          <form method="dialog" className="flex flex-col space-y-5">
+          <input
+                    onChange={handleNewDateChange}
+                    defaultValue={date}
+                    className="py-2 px-4 w-[24vw] text-[17px] bg-blue-50 text-black font-semibold rounded-md outline-none"
+                    type="date"
+                    name="updateDate"
+                  />
+          </form>
+        </div>
+        <div className="flex justify-center gap-10">
           <button
-            className="p-1 lg:px-2 lg:py-2 bg-orange-400 text-white rounded-md border-2 border-transparent hover:border-white"
-            onClick={() => document.getElementById("update").showModal()}
+            onClick={() => handleUpdateBookedDate(data._id, roomId)}
+            className="p-2 bg-orange-300 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300"
           >
-            Update
+            Send
           </button>
+          <button
+            onClick={() => setShowUpdateModal(false)}
+            className="p-2 bg-red-500 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <div>
+ 
           <dialog id="update" className="modal modal-bottom sm:modal-middle">
             <div className="modal-box bg-white dark:bg-[#212538] text-black dark:text-white h-[50vh]">
               <h3 className="font-bold text-2xl">Update booking date</h3>
@@ -230,18 +258,12 @@ const SingleUserBookingTableRow = ({ data }) => {
                   method="dialog"
                   className="flex flex-col justify-center space-y-60"
                 >
-                  <input
-                    onChange={handleNewDateChange}
-                    defaultValue={date}
-                    className="py-2 px-4 w-[24vw] text-[17px] bg-blue-50 text-black font-semibold rounded-md outline-none"
-                    type="date"
-                    name="updateDate"
-                  />
+                  
 
                   {/* if there is a button in form, it will close the modal */}
                   <div className="flex justify-center gap-10">
                     <button
-                      onClick={() => handleUpdateBookedDate(data._id, roomId)}
+                      onClick={() => handleUpdateBookedDate()}
                       className="p-2 bg-green-400 rounded-md outline-none  font-semibold  text-xl duration-700 hover:bg-green-300"
                     >
                       Confirm
