@@ -35,20 +35,23 @@ const Navbar = () => {
                   />
                 </div>
               )}
-              <div className="flex flex-col text-normal text-[16px] text-center my-5 space-y-2">
+              <div className="flex flex-col text-normal text-[16px] text-center my-2  space-y-2">
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/rooms">Rooms</NavLink>
-                <NavLink to="/addroom">Add Room</NavLink>
                 <NavLink to="/aboutus">About Us</NavLink>
                 {!user && <NavLink to="/login">Login</NavLink>}
               </div>
               {user && (
-                <button
-                  onClick={() => handleUserSignOut()}
-                  className="block bg-cyan-700 p-2 rounded-xl"
-                >
-                  Logout
-                </button>
+                <div className="text-center flex flex-col text-[16px] space-y-2">
+                  <NavLink to="/mybookings">My Bookings</NavLink>
+                  <NavLink to="/addroom">Add Room</NavLink>
+                  <button
+                    onClick={() => handleUserSignOut()}
+                    className="block bg-cyan-700 p-2 rounded-xl"
+                  >
+                    Logout
+                  </button>
+                </div>
               )}
             </div>
           </div>

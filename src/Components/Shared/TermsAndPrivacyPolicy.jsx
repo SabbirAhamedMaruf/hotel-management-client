@@ -1,10 +1,20 @@
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import { BiSolidDownArrowAlt, BiSolidUpArrowAlt } from "react-icons/bi";
 import { TiTick } from "react-icons/Ti";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+
 const TermsAndPrivacyPolicy = () => {
   const [isTermsCollapsed, setIsTermsCollapsed] = useState(true);
   const [isPrivacyPolicyCollapsed, setIsPrivacyPolicyCollapsed] =
     useState(true);
+
+  useEffect(() => {
+      setTimeout(() => {
+        AOS.init({ once: true });
+      }, 1000);
+    }, []);
 
   const handleTermsToggle = () => {
     setIsTermsCollapsed(!isTermsCollapsed);
@@ -14,7 +24,7 @@ const TermsAndPrivacyPolicy = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row justify-around">
+    <div data-aos="fade-left" className="flex flex-col lg:flex-row justify-around">
       <div className="collapse lg:w-[40vw] text-center">
         <input
           type="radio"

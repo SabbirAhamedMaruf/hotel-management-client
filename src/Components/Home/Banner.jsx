@@ -6,13 +6,22 @@ import bed2 from "../../assets/Images/banner/bed2.jpg";
 import bed3 from "../../assets/Images/banner/bed3.jpg";
 import bed4 from "../../assets/Images/banner/bed4.jpg";
 import bed5 from "../../assets/Images/banner/bed5.jpg";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 
 const Banner = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
   const plugins = [
     new AutoPlay({ duration: 3000, direction: "NEXT", stopOnHover: true }),
   ];
   return (
-    <div className="font-Edu text-center font-bold text-white">
+    <div data-aos="fade-up" className="font-Edu text-center font-bold text-white">
       <Flicking
         plugins={plugins}
         align="prev"

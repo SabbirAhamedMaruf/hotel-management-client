@@ -3,11 +3,20 @@ import { Link } from "react-router-dom";
 import { GrFacebook } from "react-icons/gr";
 import { BsYoutube, BsTwitter } from "react-icons/bs";
 import { PiInstagramLogoFill } from "react-icons/pi";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 
 const Footer = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
   return (
     <div>
-      <footer className="flex flex-col md:flex-row justify-around space-y-5 md:space-y-0 text-center  px-2 lg:px-10 py-32 bg-black dark:bg-[#212538] text-white">
+      <footer data-aos="fade-up" className="flex flex-col md:flex-row justify-around space-y-5 md:space-y-0 text-center  px-2 lg:px-10 py-32 bg-black dark:bg-[#212538] text-white">
         <aside>
           <Link>
             <img src={logoWhite} className="m-auto w-24 lg:w-44" />

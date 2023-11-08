@@ -3,13 +3,20 @@ import { CgNotes } from "react-icons/cg";
 import { GrFacebook } from "react-icons/gr";
 import { BsInstagram, BsYoutube, BsTwitter } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const UserNavbar = () => {
   const { user, handleUserSignOut } = useContext(AuthContext);
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
   return (
-    <div className="hidden lg:block bg-slate-900 text-white py-2">
+    <div data-aos="fade-down" className="hidden lg:block bg-slate-900 text-white py-2">
       <div className="w-[70%] m-auto grid grid-cols-3 items-center px-6  font-semibold">
         <div className="flex items-center gap-4">
           <h3 className="hover:text-cyan-400">Follow Us On</h3>

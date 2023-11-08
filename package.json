@@ -13,6 +13,7 @@
     "@egjs/flicking-plugins": "^4.7.1",
     "@egjs/react-flicking": "^4.11.0",
     "@headlessui/react": "^1.7.17",
+    "aos": "^2.3.4",
     "axios": "^1.6.0",
     "firebase": "^10.5.2",
     "localforage": "^1.10.0",
