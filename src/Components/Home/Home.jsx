@@ -10,6 +10,7 @@ import Banner from "./Banner";
 import Testimonials from "./Testimonials";
 import TermsAndPrivacyPolicy from "../Shared/TermsAndPrivacyPolicy";
 import FeaturedProduct from "./FeaturedProduct";
+
 const Home = () => {
   return (
     <div>
@@ -87,6 +88,15 @@ const Home = () => {
       <div id="terms" className="my-20">
         <TermsAndPrivacyPolicy/>
       </div>
+
+
+
+
+
+
+
+
+
       <Footer />
     </div>
   );

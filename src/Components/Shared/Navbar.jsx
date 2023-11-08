@@ -78,7 +78,7 @@ const Navbar = () => {
             <NavLink to="/rooms">Rooms</NavLink>
             <NavLink to="/aboutus">About Us</NavLink>
             {user && (
-              <div className="dropdown">
+              <div className="dropdown z-40">
                 <button>Dashboard</button>
                 <div
                   tabIndex={0}

@@ -3,19 +3,28 @@ import { useContext, useState } from "react";
 import useAxiosSeure from "../../Hooks/useAxiosSecure";
 import { NotificationContext } from "../../Hooks/Notification";
 import { AuthContext } from "../../Provider/AuthProvider";
+import moment from "moment";
 
 const SingleUserBookingTableRow = ({ data }) => {
-  
+  // console.log("current mapped data",data);
+
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSeure();
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const { date, roomId, roomPrice, roomPhoto } = data.currentRoomData || {};
 
+  console.log("Room Id", roomId);
+
   //   Code for review funtionality
+  // my modal
+  const [showModal, setShowModal] = useState(false);
+
   // getting date for review text
-const reviewTime = new Date();
-const postedDate = (`${reviewTime.getFullYear()}-${(reviewTime.getMonth())+1}-${reviewTime.getDate()}`);
+  const reviewTime = new Date();
+  const postedDate = `${reviewTime.getFullYear()}-${
+    reviewTime.getMonth() + 1
+  }-${reviewTime.getDate()}`;
 
   const [reviewText, setReviewText] = useState(null);
   const handleSetReviewText = (e) => {
@@ -28,18 +37,76 @@ const postedDate = (`${reviewTime.getFullYear()}-${(reviewTime.getMonth())+1}-${
   };
 
 
+
+
+
   const handleSendReviewText = (id) => {
-    const reviewData = { id, reviewText,userRating,postedDate, name:user.displayName, photo:user.photoURL};
+    const reviewData = {
+      id,
+      reviewText,
+      userRating,
+      postedDate,
+      name: user.displayName,
+      photo: user.photoURL,
+    };
     if (reviewText === null) {
       handleErrorToast("Please add some review text!");
     } else {
       axiosSecure.patch("/addreview", reviewData).then((res) => {
         if (res.data.acknowledged) {
           handleSuccessToast("Review added successfully!");
+          setShowModal(false);
         } else {
           handleErrorToast("An error occured. Please check connection!");
         }
       });
+    }
+  };
+
+
+
+
+
+
+  //   Code for update date funtionality
+  const [newDate, setNewDate] = useState(date);
+
+  const handleNewDateChange = (e) => {
+    setNewDate(e.target.value);
+  };
+
+  const handleUpdateBookedDate = (id, roomId) => {
+    if (moment(newDate, "YYYY-MM-DD").diff(moment(date, "YYYY-MM-DD")) === 0) {
+      handleErrorToast("Please select a different date to update!");
+    } else {
+      axiosSecure
+        .patch(
+          `/updateBookedDate?newDate=${newDate}&bookedId=${id}&roomId=${roomId}`
+        )
+        .then((res) => {
+          if (res.data.acknowledged) {
+            handleSuccessToast("Booked date updated successfully!");
+          } else {
+            handleErrorToast("An error occured. Please check connection!");
+          }
+        });
+    }
+  };
+
+  //   Code for Delete booking funtionality
+  const handleDeleteBookedRoom = (id, roomId) => {
+    if (moment(date, "YYYY-MM-DD").diff(moment(), "days") < 1) {
+      handleErrorToast("User can cancel booking 1 day before booked date!");
+    } else {
+      axiosSecure
+        .delete(`/deletebookedroom?id=${id}&roomId=${roomId}`)
+        .then((res) => {
+          if (res.data.acknowledged) {
+            handleSuccessToast("Order cancelelled successfully!");
+          } else {
+            handleErrorToast("An error occured. Please check connection!");
+          }
+        });
     }
   };
 
@@ -53,68 +120,48 @@ const postedDate = (`${reviewTime.getFullYear()}-${(reviewTime.getMonth())+1}-${
       <td>{roomPrice}$</td>
       <td>{date}</td>
 
+
+      {/* Review */}
       <td>
         <div>
+
+          {/* My Custom Modal */}
           <button
             className="p-1 lg:px-2 lg:py-2 bg-green-400 text-white rounded-md border-2 border-transparent hover:border-white"
-            onClick={() => document.getElementById(roomId).showModal()}
+            onClick={() => setShowModal(true)}
           >
             Review
           </button>
-          <dialog id={roomId} className="modal modal-bottom sm:modal-middle">
-            <div className="modal-box bg-white dark:bg-[#212538] text-black dark:text-white">
-              <h3 className="font-bold text-2xl text-left">
-                How was your experience
-              </h3>
+          {showModal && (
+            <div>
+              <div className="fixed inset-0 bg-[rgba(189,189,189,0.4)] z-10">
+                <div className="fixed top-[35%] left-[35%] p-10 space-y-10 bg-white  rounded-xl text-4xl">
+                  <h3 className="font-bold text-2xl text-left">
+                    How was your experience
+                  </h3>
+                  <div>
+                    <form method="dialog" className="flex flex-col space-y-5">
+                      <select
+                        className="bg-white dark:bg-[#212538] "
+                        name="rating"
+                        onChange={handleUserRating}
+                      >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
 
-              <div className="modal-action justify-start">
-                <form method="dialog" className="flex flex-col space-y-5">
-
-                  {/* <div className="rating rating-md">
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                      checked
-                    />
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                  </div> */}
-
-                  <select name="rating" onChange={handleUserRating}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-
-                  <input
-                    onChange={handleSetReviewText}
-                    className="py-2 px-4 w-[24vw] text-[17px] bg-blue-50 text-black font-semibold rounded-md outline-none"
-                    type="text"
-                    name="review"
-                    placeholder="Write a review"
-                  />
-                  {/* if there is a button in form, it will close the modal */}
+                      <input
+                        onChange={handleSetReviewText}
+                        className="py-2 px-4 w-[24vw] text-[17px] bg-blue-50 text-black font-semibold rounded-md outline-none"
+                        type="text"
+                        name="review"
+                        placeholder="Write a review"
+                      />
+                    </form>
+                  </div>
                   <div className="flex justify-center gap-10">
                     <button
                       onClick={() => handleSendReviewText(roomId)}
@@ -122,17 +169,50 @@ const postedDate = (`${reviewTime.getFullYear()}-${(reviewTime.getMonth())+1}-${
                     >
                       Send
                     </button>
-                    <button className="p-2 bg-red-500 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300">
+                    <button
+                      onClick={() => setShowModal(false)}
+                      className="p-2 bg-red-500 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300"
+                    >
                       Close
                     </button>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
-          </dialog>
+          )}
         </div>
       </td>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {/* Update */}
       <td>
         {" "}
         <div>
@@ -143,109 +223,69 @@ const postedDate = (`${reviewTime.getFullYear()}-${(reviewTime.getMonth())+1}-${
             Update
           </button>
           <dialog id="update" className="modal modal-bottom sm:modal-middle">
-            <div className="modal-box bg-blue-200">
-              <h3 className="font-bold text-2xl">How was your experience</h3>
-
-              <div className="modal-action justify-start">
-                <form method="dialog" className="flex flex-col space-y-5">
-                  <div className="rating rating-md">
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                      checked
-                    />
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                  </div>
+            <div className="modal-box bg-white dark:bg-[#212538] text-black dark:text-white h-[50vh]">
+              <h3 className="font-bold text-2xl">Update booking date</h3>
+              <div className="modal-action">
+                <form
+                  method="dialog"
+                  className="flex flex-col justify-center space-y-60"
+                >
                   <input
-                    className="py-2 px-4 w-[24vw] text-[17px] bg-blue-50 rounded-md outline-none"
-                    type="text"
-                    name="review"
-                    placeholder="Write a review"
+                    onChange={handleNewDateChange}
+                    defaultValue={date}
+                    className="py-2 px-4 w-[24vw] text-[17px] bg-blue-50 text-black font-semibold rounded-md outline-none"
+                    type="date"
+                    name="updateDate"
                   />
+
                   {/* if there is a button in form, it will close the modal */}
-                  <button className="py-2 bg-orange-300 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300">
-                    Close
-                  </button>
+                  <div className="flex justify-center gap-10">
+                    <button
+                      onClick={() => handleUpdateBookedDate(data._id, roomId)}
+                      className="p-2 bg-green-400 rounded-md outline-none  font-semibold  text-xl duration-700 hover:bg-green-300"
+                    >
+                      Confirm
+                    </button>
+                    <button className="px-4 py-2 bg-red-500 rounded-md outline-none font-semibold  text-xl duration-700 hover:bg-green-300">
+                      Close
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
           </dialog>
         </div>
       </td>
+
+      {/* Delete */}
       <td>
         <div>
           <button
-            className="p-1 lg:px-2 bg-red-500 text-white rounded-md border-2 border-transparent hover:border-white"
+            className="p-1 lg:px-2 lg:py-2 bg-red-500 text-white rounded-md border-2 border-transparent hover:border-white"
             onClick={() => document.getElementById("delete").showModal()}
           >
             Delete
           </button>
           <dialog id="delete" className="modal modal-bottom sm:modal-middle">
-            <div className="modal-box bg-blue-200">
+            <div className="modal-box bg-white dark:bg-[#212538] text-black dark:text-white">
               <h3 className="font-bold text-2xl text-left">
-                How was your experience
+                Delete booked room?
               </h3>
 
               <div className="modal-action justify-start">
                 <form method="dialog" className="flex flex-col space-y-5">
-                  <div className="rating rating-md">
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                      checked
-                    />
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                  </div>
-                  <input
-                    className="py-2 px-4 w-[24vw] text-[17px] bg-blue-50 rounded-md outline-none"
-                    type="text"
-                    name="review"
-                    placeholder="Write a review"
-                  />
                   {/* if there is a button in form, it will close the modal */}
-                  <button className="py-2 bg-orange-300 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300">
-                    Close
-                  </button>
+                  <div className="px-40 pt-10 flex justify-center gap-10">
+                    <button
+                      onClick={() => handleDeleteBookedRoom(data._id, roomId)}
+                      className="px-4 py-2 bg-orange-300 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300"
+                    >
+                      Yes
+                    </button>
+                    <button className="px-4 py-2 bg-red-500 rounded-md outline-none text-black font-semibold  text-xl duration-700 hover:bg-green-300">
+                      No
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -261,3 +301,9 @@ SingleUserBookingTableRow.propTypes = {
 };
 
 export default SingleUserBookingTableRow;
+
+// TODO fix review add korle prothom review data moddhe review count bare. ami data k destructure koresi and review handler function moddhe id pathassi. data.currentRoomData theke roomid. (I think ar roomid ta thik moto boshtesena) {check id sending}
+
+// TODO  also after deletion ui relaod hocche na
+
+// TODO implemenet jwt for all routes and work on update date functionality

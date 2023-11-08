@@ -9,7 +9,6 @@ const Mybookings = () => {
   const [userBookedRooms , setUserBookedRooms] = useState([]);
   const {user} = useContext(AuthContext);
   const userEmail = user.email;
-  console.log(userEmail);
   const axiosSecure = useAxiosSeure();
 
 
@@ -18,8 +17,8 @@ const Mybookings = () => {
     .then(res=>setUserBookedRooms(res.data))
   },[axiosSecure,userEmail])
 
-  console.log(userBookedRooms);
-
+ 
+  console.log("user booked rooms collection",userBookedRooms);
 
 
   return (
@@ -43,7 +42,7 @@ const Mybookings = () => {
               Your Bookings
             </h1>
           </div>
-          <div className="bg-blue-50 dark:bg-slate-900">
+          <div className="pb-60 bg-blue-50 dark:bg-slate-900">
             <div className="w-[90vw] m-auto">
               <div className="overflow-x-auto">
                 <table className="table text-center lg:text-xl mt-20 mb-96 md:mb-80 lg:mb-36">

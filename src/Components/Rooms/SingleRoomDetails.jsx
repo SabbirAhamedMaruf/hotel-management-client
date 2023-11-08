@@ -237,7 +237,7 @@ const SingleRoomDetails = () => {
                 </div>
               </div>
 
-              <div className="roomDetailTestimonial w-[90vw] lg:h-[61vh] lg:w-[40vw] grid justify-center items-top rounded-xl  space-y-3">
+              <div className="roomDetailTestimonial w-[90vw] lg:h-[61vh] lg:w-[40vw]  rounded-xl  space-y-3">
                 {currentRoomReviews.map((i) => (
                   <SingleRoomReviews key={i._id} data={i}></SingleRoomReviews>
                 ))}
