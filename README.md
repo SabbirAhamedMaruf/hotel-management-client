@@ -1,6 +1,6 @@
 # Website Releatd To Hotel Booking
 
-<span>Website Link : <a href="https://6533ece1e7d324382e5465a1--spectacular-beignet-845ef7.netlify.app/">Click Here</a></span>
+<span>Website Link : <a href="https://654bbeed40b0ee1727cfa53b--chimerical-treacle-35dd40.netlify.app/">Click Here</a></span>
 
 ## Features of this project
 
@@ -12,6 +12,3 @@
 - Update booking date system.
 - Rooms addition functionality.
 - Responsive design
-
-
-
