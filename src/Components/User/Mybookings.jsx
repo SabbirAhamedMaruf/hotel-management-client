@@ -4,8 +4,10 @@ import useAxiosSeure from "../../Hooks/useAxiosSecure";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import SingleUserBookingTableRow from "./SingleUserBookingTableRow";
+import { Helmet } from "react-helmet";
 
 const Mybookings = () => {
+  const [fetch,setfetch] = useState(false);
   const [userBookedRooms , setUserBookedRooms] = useState([]);
   const {user} = useContext(AuthContext);
   const userEmail = user.email;
@@ -15,7 +17,7 @@ const Mybookings = () => {
   useEffect(()=>{
     axiosSecure.post("/mybookings",{userEmail})
     .then(res=>setUserBookedRooms(res.data))
-  },[axiosSecure,userEmail])
+  },[axiosSecure,userEmail,fetch])
 
  
   console.log("user booked rooms collection",userBookedRooms);
@@ -23,6 +25,10 @@ const Mybookings = () => {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{"Ilk Lodge (My Bookings)"}</title>
+      </Helmet>
       <div className="w-[90vw] m-auto">
         <Navbar />
       </div>
@@ -60,7 +66,7 @@ const Mybookings = () => {
                   <tbody>
                     {/* row 1 */}
                     {
-                      userBookedRooms?.map(i=><SingleUserBookingTableRow key={i._id} data={i}></SingleUserBookingTableRow>)
+                      userBookedRooms?.map(i=><SingleUserBookingTableRow fetch={fetch} setfetch={setfetch} key={i._id} data={i}></SingleUserBookingTableRow>)
                     }
                   </tbody>
                 </table>

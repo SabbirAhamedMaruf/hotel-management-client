@@ -1,11 +1,16 @@
 import Navbar from "../Shared/Navbar";
 import errorLogo from "../../assets/Images/error.png";
 import { Link, useRouteError } from "react-router-dom";
+import { Helmet } from "react-helmet";
 const Errorpage = () => {
   const error = useRouteError();
   console.log(error);
   return (
     <div className="font-Jost h-[100vh] bg-blue-100 dark:bg-slate-900 text-black dark:text-white">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{"Ilk Lodge (Error)"}</title>
+      </Helmet>
       <div className="w-[95%] lg:w-[90%] m-auto pt-5">
         <Navbar />
         <div className="grid justify-center items-center">

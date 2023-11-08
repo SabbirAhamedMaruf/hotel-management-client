@@ -4,6 +4,7 @@ import { GrGoogle } from "react-icons/gr";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { Helmet } from "react-helmet";
 const Login = () => {
   const [error, setError] = useState(null);
   const { loginWithEmail, loginWithGoogle } = useContext(AuthContext);
@@ -37,6 +38,10 @@ const Login = () => {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{"Ilk Lodge (Login)"}</title>
+      </Helmet>
       <div className="w-[90%] lg:h-[100vh] m-auto">
         <Navbar />
         <div className="grid justify-center items-center py-5">

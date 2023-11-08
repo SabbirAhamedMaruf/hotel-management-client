@@ -11,9 +11,11 @@ import useAxiosSeure from "../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { NotificationContext } from "../../Hooks/Notification";
 import SingleRoomReviews from "./SingleRoomReviews";
+import { Helmet } from "react-helmet";
 
 const SingleRoomDetails = () => {
   const [currentRoomDetail, setCurrentRoomDetail] = useState([]);
+  const [fetch,setFetch] = useState(true);
   const [currentRoomReviews, setCurrentRoomReviews] = useState([]);
 
   const { handleSuccessToast, handleErrorToast } =
@@ -58,6 +60,7 @@ const SingleRoomDetails = () => {
       .then((res) => {
         if (res.data.acknowledged) {
           handleSuccessToast("Room Booked successfully!");
+          setFetch(!fetch)
         } else {
           handleErrorToast(
             "An error occured. Please check internet conneciton!"
@@ -72,12 +75,16 @@ const SingleRoomDetails = () => {
       setCurrentRoomDetail(res.data.roomData);
       setCurrentRoomReviews(res.data.reviews);
     });
-  }, [axiosSecure, id]);
+  }, [axiosSecure, id,fetch]);
 
 
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{"Ilk Lodge (Room details)"}</title>
+      </Helmet>
       <div className="w-[90vw] m-auto">
         <Navbar />
       </div>

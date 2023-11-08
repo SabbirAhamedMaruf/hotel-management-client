@@ -4,6 +4,7 @@ import registerbg from "../../assets/Images/registerbg.jpg";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const [error, setError] = useState(null);
@@ -43,6 +44,10 @@ const Register = () => {
   };
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{"Ilk Lodge (Register)"}</title>
+      </Helmet>
       <div className="w-[90%] lg:h-[100vh] m-auto">
         <Navbar />
         <div className="grid justify-center items-center py-5">

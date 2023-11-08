@@ -3,6 +3,7 @@ import roombanner from "../../assets/Images/rooms/bg.jpg";
 import useAxiosSeure from "../../Hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import SingleRoom from "./SingleRoom";
+import { Helmet } from "react-helmet";
 
 
 
@@ -38,6 +39,10 @@ const Rooms = () => {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{"Ilk Lodge (Rooms)"}</title>
+      </Helmet>
       <div className="w-[90vw] m-auto">
         <Navbar />
       </div>

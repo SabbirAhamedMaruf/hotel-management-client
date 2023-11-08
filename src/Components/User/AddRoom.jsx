@@ -3,6 +3,7 @@ import useAxiosSeure from "../../Hooks/useAxiosSecure";
 import { useContext } from "react";
 import { NotificationContext } from "../../Hooks/Notification";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const AddRoom = () => {
   const {user} = useContext(AuthContext);
@@ -42,6 +43,10 @@ const AddRoom = () => {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{"Ilk Lodge (Add Room)"}</title>
+      </Helmet>
       <div>
         <div>
           <div className="pb-10">

@@ -5,9 +5,7 @@ import { NotificationContext } from "../../Hooks/Notification";
 import { AuthContext } from "../../Provider/AuthProvider";
 import moment from "moment";
 
-const SingleUserBookingTableRow = ({ data }) => {
-  // console.log("current mapped data",data);
-
+const SingleUserBookingTableRow = ({ fetch,setfetch,data }) => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSeure();
   const { handleSuccessToast, handleErrorToast } =
@@ -77,6 +75,7 @@ const SingleUserBookingTableRow = ({ data }) => {
           if (res.data.acknowledged) {
             handleSuccessToast("Booked date updated successfully!");
             setShowUpdateModal(false);
+            setfetch(!fetch);
           } else {
             handleErrorToast("An error occured. Please check connection!");
           }
@@ -96,6 +95,7 @@ const SingleUserBookingTableRow = ({ data }) => {
           if (res.data.acknowledged) {
             handleSuccessToast("Order cancelelled successfully!");
             setShowDeleteModal(false);
+            setfetch(!fetch);
           } else {
             handleErrorToast("An error occured. Please check connection!");
           }
@@ -316,12 +316,9 @@ const SingleUserBookingTableRow = ({ data }) => {
 
 SingleUserBookingTableRow.propTypes = {
   data: PropTypes.object,
+  setfetch: PropTypes.func,
+  fetch : PropTypes.bool
 };
 
 export default SingleUserBookingTableRow;
 
-// TODO fix review add korle prothom review data moddhe review count bare. ami data k destructure koresi and review handler function moddhe id pathassi. data.currentRoomData theke roomid. (I think ar roomid ta thik moto boshtesena) {check id sending}
-
-// TODO  also after deletion ui relaod hocche na
-
-// TODO implemenet jwt for all routes and work on update date functionality

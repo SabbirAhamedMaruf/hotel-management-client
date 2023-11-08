@@ -7,12 +7,17 @@ import { useTheme } from "../../Hooks/useTheme";
 import { GrFacebook } from "react-icons/gr";
 import { BsTwitter } from "react-icons/bs";
 import { FiInstagram } from "react-icons/fi";
+import { Helmet } from "react-helmet";
 
 
 const Aboutus = () => {
   const { theme } = useTheme();
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{"Ilk Lodge (About us)"}</title>
+      </Helmet>
       <div className="w-[90vw] m-auto">
         <Navbar />
       </div>

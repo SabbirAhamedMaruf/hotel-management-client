@@ -10,10 +10,15 @@ import Banner from "./Banner";
 import Testimonials from "./Testimonials";
 import TermsAndPrivacyPolicy from "../Shared/TermsAndPrivacyPolicy";
 import FeaturedProduct from "./FeaturedProduct";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{"Ilk Lodge (Home)"}</title>
+      </Helmet>
       <UserNavbar />
       <div className="w-[95%] lg:w-[70%] m-auto">
         <Navbar />
@@ -22,9 +27,17 @@ const Home = () => {
         <Banner />
       </div>
       <div className="w-[95%] lg:w-[90%] m-auto">
-        <h1 className="font-Edu font-bold text-3xl md:text-4xl lg:text-7xl  text-center my-[10%] md:my-[5%] lg:my-[4%]">Our Featured Suite</h1>
-        <p className="w-[90%] md:w-[70%] lg:w-[50%] m-auto text-center my-[10%] md:my-[5%] lg:my-[2%]">Discover the epitome of opulence in our featured rooms at Ilk Lodge. Combining exquisite design, unparalleled comfort, and panoramic vistas, these rooms offer a sanctuary of luxury. Immerse yourself in a world of elegance and sophistication, ensuring an unforgettable stay at our hotel.</p>
-          <FeaturedProduct/>
+        <h1 className="font-Edu font-bold text-3xl md:text-4xl lg:text-7xl  text-center my-[10%] md:my-[5%] lg:my-[4%]">
+          Our Featured Suite
+        </h1>
+        <p className="w-[90%] md:w-[70%] lg:w-[50%] m-auto text-center my-[10%] md:my-[5%] lg:my-[2%]">
+          Discover the epitome of opulence in our featured rooms at Ilk Lodge.
+          Combining exquisite design, unparalleled comfort, and panoramic
+          vistas, these rooms offer a sanctuary of luxury. Immerse yourself in a
+          world of elegance and sophistication, ensuring an unforgettable stay
+          at our hotel.
+        </p>
+        <FeaturedProduct />
       </div>
       {/* Hotel Testimonials */}
       <div
@@ -86,16 +99,8 @@ const Home = () => {
         </div>
       </div>
       <div id="terms" className="my-20">
-        <TermsAndPrivacyPolicy/>
+        <TermsAndPrivacyPolicy />
       </div>
-
-
-
-
-
-
-
-
 
       <Footer />
     </div>
