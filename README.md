@@ -4,6 +4,16 @@
 
 <span>Server Side Repo Link : <a href="https://github.com/SabbirAhamedMaruf/hotel-management-server">Click Here</a></span>
 
+## Technology used in this project
+
+- React
+- React Router
+- Axios
+- Moment JS
+- Firebase
+- Tailwind CSS
+
+
 ## Features of this project
 
 - Backend intregration. (Mongodb)
