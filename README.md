@@ -1,6 +1,6 @@
 # Website Releatd To Hotel Booking
 
-<span>Website Link : <a href="https://654bbeed40b0ee1727cfa53b--chimerical-treacle-35dd40.netlify.app/">Click Here</a></span>
+<span>Website Link : <a href="https://chimerical-treacle-35dd40.netlify.app">Click Here</a></span>
 
 <span>Server Side Repo Link : <a href="https://github.com/SabbirAhamedMaruf/hotel-management-server">Click Here</a></span>
 
@@ -12,7 +12,6 @@
 - Moment JS
 - Firebase
 - Tailwind CSS
-
 
 ## Features of this project
 
