@@ -38,7 +38,7 @@ const Promotions = () => {
               <h1>One Weeks</h1>
               <h1>Family Suite</h1>
             </div>
-            <h1 className="px-4 py-1 bg-black text-white rounded-md">{i.price}</h1>
+            <h1 className="px-4 py-1 bg-black text-white rounded-md">{i.price}$</h1>
           </div>
         ))}
       </div>
