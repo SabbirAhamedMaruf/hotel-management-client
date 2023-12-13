@@ -11,6 +11,7 @@ import Testimonials from "./Testimonials";
 import TermsAndPrivacyPolicy from "../Shared/TermsAndPrivacyPolicy";
 import FeaturedProduct from "./FeaturedProduct";
 import { Helmet } from "react-helmet";
+import Promotions from "./Promotions";
 
 const Home = () => {
   return (
@@ -39,6 +40,13 @@ const Home = () => {
         </p>
         <FeaturedProduct />
       </div>
+      {/* Promotions */}
+      <div>
+        <Promotions/>
+      </div>
+
+
+
       {/* Hotel Testimonials */}
       <div
         style={{
