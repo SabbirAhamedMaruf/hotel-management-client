@@ -11,6 +11,7 @@ import Rooms from "../Components/Rooms/Rooms";
 import SingleRoomDetails from "../Components/Rooms/SingleRoomDetails";
 import Mybookings from "../Components/User/Mybookings";
 import AddRoom from "../Components/User/AddRoom";
+import News from "../Components/Home/News";
 
 const routes = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const routes = createBrowserRouter([
       {
         path:"/register",
         element:<Register/>
+      },
+      {
+        path:"/news",
+        element:<News/>
       },
       {
         path:"/mybookings",

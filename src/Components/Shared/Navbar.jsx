@@ -38,6 +38,7 @@ const Navbar = () => {
               <div className="flex flex-col text-normal text-[16px] text-center my-2  space-y-2">
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/rooms">Rooms</NavLink>
+                <NavLink to="/news">News</NavLink>
                 <NavLink to="/aboutus">About Us</NavLink>
                 {!user && <NavLink to="/login">Login</NavLink>}
               </div>
@@ -79,6 +80,7 @@ const Navbar = () => {
           <ul className="navMenu hidden lg:inline font-semibold space-x-5">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/rooms">Rooms</NavLink>
+            <NavLink to="/news">News</NavLink>
             <NavLink to="/aboutus">About Us</NavLink>
             {user && (
               <div className="dropdown z-40">

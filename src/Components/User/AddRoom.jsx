@@ -54,7 +54,7 @@ const AddRoom = () => {
               <Navbar />
             </div>
             <div className="w-[90vw] p-4 lg:p-14 m-auto shadow-2xl rounded-lg my-14 bg-white dark:bg-[#334155]">
-              <h1 className="text-center font-bold text-4xl py-8 ">Add Room</h1>
+              <h1 className="text-center font-bold text-3xl md:text-4xl lg:text-5xl py-8 font-Edu">Add Room</h1>
               <div className="m-auto w-[80%] pb-8">
                 <form
                   onSubmit={handleAddRoom}
