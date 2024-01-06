@@ -3,7 +3,7 @@ const SingleRoomReviews = ({data}) => {
     const {name,photo,postedDate,reviewText,userRating} = data || {};
   return (
     <div>
-      <div className="flex justify-center items-center gap-5 w-full lg:h-[15vh] rounded-xl p-5 bg-blue-50 dark:bg-[#212538] border-2 border-gray-400">
+      <div className="flex justify-center items-center gap-5 w-full lg:h-[15vh] rounded-xl p-5 bg-[#ffffff] dark:bg-[#212538] border-2 border-gray-400">
         <img src={photo} className="w-14 lg:w-24 rounded-full" />
         <div>
           <h3 className="font-bold lg:text-xl">{name}</h3>

@@ -1,5 +1,5 @@
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../../assets/Images/logo.png";
 import logoWhite from "../../assets/Images/logo-white.png";
 import "../../index.css";
@@ -12,17 +12,23 @@ import { useTheme } from "../../Hooks/useTheme";
 const Navbar = () => {
   const { user, handleUserSignOut } = useContext(AuthContext);
   const { theme, changeTheme } = useTheme();
+  const location = useLocation();
+  console.log(location);
   return (
     <div>
       <div className="grid grid-cols-3 items-center px-6">
         <div>
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
-              <HiOutlineMenuAlt1 className="text-xl md:text-2xl" />
+              <HiOutlineMenuAlt1
+                className={`text-xl md:text-2xl ${
+                  theme === "light" ? "text-black" : "text-white"
+                }`}
+              />
             </label>
             <div
               tabIndex={0}
-              className="navMenu menu menu-sm dropdown-content mt-3 p-2 shadow rounded-box w-60 md:w-72 z-10 bg-white dark:bg-[#212538]"
+              className="navMenu menu menu-sm dropdown-content mt-2 md: p-2 shadow rounded-b-lg w-60 md:w-72 z-10 mx-auto bg-[#ffffff] dark:bg-[#212538]"
             >
               {user && (
                 <div className="flex justify-center items-center gap-5 bg-gradient-to-r from-cyan-400 to-blue-600 p-1 rounded-xl">
@@ -35,7 +41,11 @@ const Navbar = () => {
                   />
                 </div>
               )}
-              <div className="flex flex-col text-normal text-[16px] text-center my-2  space-y-2">
+              <div
+                className={`flex flex-col text-normal text-[16px] text-center my-2 space-y-2 ${
+                  theme === "light" ? "text-black" : "text-white"
+                }`}
+              >
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/rooms">Rooms</NavLink>
                 <NavLink to="/news">News</NavLink>
@@ -56,14 +66,15 @@ const Navbar = () => {
               )}
             </div>
           </div>
-
           <Link to="/" className="hidden lg:block">
-            {theme === "light" ? (
+            {theme === "light" && location.pathname === "/" ? (
+              <img src={logoWhite} className="w-24" />
+            ) : theme === "light" ? (
               <img src={logo} className="w-24" />
             ) : (
               <img src={logoWhite} className="w-24" />
             )}
-            <h1 className="font-semibold ml-3">Ilk Lodge</h1>
+            <h1 className="font-semibold">Ilk Lodge</h1>
           </Link>
         </div>
 
@@ -74,9 +85,8 @@ const Navbar = () => {
             ) : (
               <img src={logoWhite} className="w-14" />
             )}
-            <h1 className="font-semibold">Ilk Lodge</h1>
+            <h1 className="font-semibold ml-3">Ilk Lodge</h1>
           </Link>
-
           <ul className="navMenu hidden lg:inline font-semibold space-x-5">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/rooms">Rooms</NavLink>
@@ -87,7 +97,7 @@ const Navbar = () => {
                 <button>Dashboard</button>
                 <div
                   tabIndex={0}
-                  className="navMenu  dropdown-content mt-8 px-3  py-4 shadow rounded-b-xl w-60 md:w-72 z-10 bg-blue-50 dark:bg-slate-900"
+                  className="navMenu  dropdown-content mt-8 px-3  py-4 shadow rounded-b-xl w-60 md:w-72 z-10 bg-[#ffffff] dark:bg-slate-900"
                 >
                   {user && (
                     <div className="flex justify-center items-center gap-3 bg-gradient-to-r from-cyan-400 to-blue-600 p-1 rounded-xl">
@@ -113,23 +123,20 @@ const Navbar = () => {
         <div className="justify-self-end flex items-center space-x-5">
           <button onClick={changeTheme}>
             {theme === "light" ? (
-              <BiSolidMoon className="inline text-xl" />
+              <BiSolidMoon className="inline text-2xl lg:text-4xl p-1 lg:p-2 bg-[#fdba74] text-black rounded-full" />
             ) : (
-              <FaSun className="inline text-xl" />
+              <FaSun className="inline text-2xl lg:text-4xl p-1 lg:p-2 bg-[#fdba74] text-black rounded-full" />
             )}
           </button>
 
           <div className="relative">
             <div className="hidden lg:block">
-              <button className="bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md">
-                Book Now
-              </button>
-              <Link to="/rooms">
+              <Link to="/login">
                 <button
                   onClick={() => handleUserSignOut()}
-                  className="bg-gradient-to-l from-cyan-400 to-blue-600 text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md absolute inset-0 opacity-0 transition duration-700 hover:opacity-100"
+                  className="bg-[#fdba74] text-black font-bold px-2 py-1 md:px-3 lg:px-7 lg:py-4 "
                 >
-                  Book Now
+                  Login
                 </button>
               </Link>
             </div>

@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import Navbar from "../Shared/Navbar";
 import { useEffect, useState } from "react";
 import useAxiosSeure from "../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const News = () => {
   const [news, setNews] = useState([]);
@@ -23,7 +24,10 @@ const News = () => {
               <Navbar />
             </div>
             <div className="w-[90vw] p-4 lg:p-14 m-auto shadow-2xl rounded-lg my-14 bg-white dark:bg-[#334155]">
-              <h1 className="text-center font-bold text-3xl md:text-4xl lg:text-5xl py-8  font-Edu">News</h1>
+              <h1 className="text-center font-bold text-3xl md:text-4xl lg:text-5xl py-8  font-Edu">
+                News
+              </h1>
+
               <div className="m-auto w-[90%] md:w-[80%] pb-8 space-y-5">
                 {news.map((i) => (
                   <div
@@ -37,8 +41,15 @@ const News = () => {
                       />
                     </figure>
                     <div className="md:w-2/3 card-body">
-                      <h2 className="font-semibold text-xl lg:text-3xl">{i.title}</h2>
+                      <h2 className="font-semibold text-xl lg:text-3xl">
+                        {i.title}
+                      </h2>
                       <p className="text-2xl">{i.description}</p>
+                      <Link to="/news">
+                        <button className=" px-3 py-2 font-semibold bg-[#fdba74] w-max">
+                        Read More
+                      </button>
+                      </Link>
                     </div>
                   </div>
                 ))}

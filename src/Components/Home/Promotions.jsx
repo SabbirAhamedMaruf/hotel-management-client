@@ -11,6 +11,8 @@ const Promotions = () => {
     axiosSecure.get("/promotions").then((res) => setPromotionRooms(res.data));
   }, [axiosSecure]);
 
+  console.log(promotionRooms)
+
   return (
     <div className="w-[85vw] mx-auto my-20 flex flex-col lg:flex-row justify-center items-center gap-10">
       <div className="lg:w-1/3 flex  flex-col space-y-5 lg:space-y-10">
@@ -28,19 +30,25 @@ const Promotions = () => {
           <h1 className="text-[18px] lg:text-2xl font-semibold">Ryan Miller</h1>
         </div>
       </div>
-      <div className="hidden lg:block w-1/3 mr-0 lg:mr-20">
+      <div className="relative hidden lg:block w-1/3 mr-0 lg:mr-20">
         <img src={promotionBanner} className="w-96 rounded-xl" />
-        <div className="absolute"></div>
+        <div className="absolute w-[20vw] h-full bg-black inset-0 opacity-30 rounded-lg"></div>
       </div>
-      <div className="lg:absolute w-full lg:w-96 right-72 space-y-10">
+
+
+      
+      <div className="lg:absolute w-full lg:w-[450px] right-72 space-y-10">
         {promotionRooms.map((i) => (
-          <div className="flex justify-around items-center gap-10" key={i._id}>
-            <img src={i.photo} className="w-32 rounded-md" />
+          <div
+            className="flex justify-around items-center gap-10 rounded-lg h-32 lg:shadow-md lg:p-2 z-30"
+            key={i._id}
+          >
+            <img src={i.photo} className="w-32 h-28 object-cover rounded-md" />
             <div>
               <h1>One Weeks</h1>
-              <h1>Family Suite</h1>
+              <h1>{i.type}</h1>
             </div>
-            <h1 className="px-4 py-1 bg-black text-white rounded-md">
+            <h1 className="px-4 py-1 bg-[#ffab50] text-white rounded-md">
               {i.price}$
             </h1>
           </div>

@@ -31,7 +31,3 @@ const Testimonials = () => {
 
 export default Testimonials;
 
-// TODO Create a page where admin can insert new room follow room requirments from there.
-// TODO create room gallery visit awsome component
-// TODO you wanted to add a drop down menu when it show user name and and signout. It can be implemented but use can use secondary navber to display user information.
-

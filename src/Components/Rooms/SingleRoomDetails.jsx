@@ -103,7 +103,7 @@ const SingleRoomDetails = () => {
             </h1>
           </div>
 
-          <div className="bg-blue-50 dark:bg-slate-900 py-10 lg:py-20">
+          <div className="bg-[#ffffff] dark:bg-slate-900 py-10 lg:py-20">
             <div className="flex flex-col md:flex-row items-center gap-10 w-[90vw] m-auto">
               <div className="relative">
                 <img
@@ -272,6 +272,3 @@ const SingleRoomDetails = () => {
 
 export default SingleRoomDetails;
 
-// TODO add review comment inside detail page
-
-// TODO  make a condition for room booking button based on available field on room page

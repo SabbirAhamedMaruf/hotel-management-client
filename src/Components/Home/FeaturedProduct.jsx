@@ -22,7 +22,7 @@ const FeaturedProduct = () => {
   }, [axiosSecure]);
 
   return (
-    <div data-aos="fade-right" className="m-auto w-[90%] lg:w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div data-aos="fade-right" className="m-auto w-[90%] lg:w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-7">
       {featuedProduct.map((i) => (
         <SingleRoom key={i._id} data={i}></SingleRoom>
       ))}

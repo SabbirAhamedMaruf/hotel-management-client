@@ -1,7 +1,6 @@
 import Footer from "../Shared/Footer";
 import Navbar from "../Shared/Navbar";
-import UserNavbar from "./UserNavbar";
-import { Map, Marker } from "pigeon-maps";
+import { Map, Marker,ZoomControl } from "pigeon-maps";
 import { HiOutlinePhoneIncoming } from "react-icons/hi";
 import { FaRegEnvelopeOpen } from "react-icons/fa";
 import AboutUsSectionGirl from "../../assets/Images/girl.jpg";
@@ -20,11 +19,10 @@ const Home = () => {
         <meta charSet="utf-8" />
         <title>{"Ilk Lodge (Home)"}</title>
       </Helmet>
-      <UserNavbar />
-      <div className="w-[95%] lg:w-[70%] m-auto">
+      <div className="lg:absolute z-30 w-screen text-white py-1 md:py-2">
         <Navbar />
       </div>
-      <div className="w-[95%] lg:w-[90%] m-auto">
+      <div className="m-auto">
         <Banner />
       </div>
       <div className="w-[95%] lg:w-[90%] m-auto">
@@ -42,10 +40,8 @@ const Home = () => {
       </div>
       {/* Promotions */}
       <div>
-        <Promotions/>
+        <Promotions />
       </div>
-
-
 
       {/* Hotel Testimonials */}
       <div
@@ -65,17 +61,21 @@ const Home = () => {
           <Testimonials />
         </div>
       </div>
-
       {/* Home page about us section */}
-
-      <div className="grid grid-cols-2 lg:grid-cols-4 my-20">
+      <h1 className="font-Edu font-bold text-3xl md:text-4xl lg:text-7xl  text-center mb-[10%] md:mb-8 -mt-10 md:-mt-5">
+        Stay In Touch
+      </h1>
+      <div className="grid grid-cols-2 lg:grid-cols-4">
         <div className="col-span-2">
           <Map
+            
             height={300}
             defaultCenter={[21.417077, 91.981278]}
             defaultZoom={11}
+            metaWheelZoom={true}
           >
             <Marker width={50} anchor={[21.417077, 91.981278]} />
+            <ZoomControl />
           </Map>
         </div>
         <div className="grid justify-left p-10 bg-slate-900 dark:bg-[#212538] text-white">
@@ -106,6 +106,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+
       <div id="terms" className="my-20">
         <TermsAndPrivacyPolicy />
       </div>

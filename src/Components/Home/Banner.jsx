@@ -6,22 +6,14 @@ import bed2 from "../../assets/Images/banner/bed2.jpg";
 import bed3 from "../../assets/Images/banner/bed3.jpg";
 import bed4 from "../../assets/Images/banner/bed4.jpg";
 import bed5 from "../../assets/Images/banner/bed5.jpg";
-import { useEffect } from "react";
-import AOS from "aos";
 import "aos/dist/aos.css";
 
-
 const Banner = () => {
-  useEffect(() => {
-    setTimeout(() => {
-      AOS.init({ once: true });
-    }, 1000);
-  }, []);
   const plugins = [
     new AutoPlay({ duration: 3000, direction: "NEXT", stopOnHover: true }),
   ];
   return (
-    <div data-aos="fade-up" className="font-Edu text-center font-bold text-white">
+    <div className="font-Edu text-center text-white">
       <Flicking
         plugins={plugins}
         align="prev"
@@ -29,8 +21,8 @@ const Banner = () => {
         onMoveEnd={() => {}}
       >
         <div className="panel relative">
-          <div className="absolute w-full h-full bg-black opacity-20"></div>
-          <div className="absolute top-[30%] md:top-[40%] md:left-[10%] lg:top-[30%] lg:left-[26%] md:w-[80%] lg:w-[40%] space-y-5">
+          <div className="absolute w-full h-screen bg-black opacity-40"></div>
+          <div className="absolute top-[30%] md:top-[40%] md:left-[10%] lg:top-[30%] lg:left-[29%] md:w-[80%] lg:w-[40%] space-y-5">
             <h1 className="text-2xl md:text-4xl lg:text-7xl">
               Warmest Greetings from Ilk Lodge
             </h1>
@@ -40,12 +32,12 @@ const Banner = () => {
               }
             </p>
           </div>
-          <img src={bed1} className="lg:h-[75vh] w-[95vw] object-cover" />
+          <img src={bed1} className="w-screen lg:h-screen object-cover" />
         </div>
 
         <div className="panel relative">
           <div className="absolute w-full h-full bg-black opacity-40"></div>
-          <div className="absolute top-[30%] md:top-[40%] md:left-[10%] lg:top-[30%] lg:left-[26%] md:w-[80%] lg:w-[40%] space-y-5">
+          <div className="absolute top-[30%] md:top-[40%] md:left-[10%] lg:top-[30%] lg:left-[29%] md:w-[80%] lg:w-[40%] space-y-5">
             <h1 className="text-2xl md:text-4xl lg:text-7xl">
               Step Inside, Step into Serenity! At Ilk Lodge
             </h1>
@@ -55,12 +47,12 @@ const Banner = () => {
               }
             </p>
           </div>
-          <img src={bed2} className="lg:h-[75vh] w-[95vw] object-cover" />
+          <img src={bed2} className="w-screen lg:h-screen object-cover" />
         </div>
 
         <div className="panel relative">
-          <div className="absolute w-full h-full bg-black opacity-40"></div>
-          <div className="absolute top-[30%] md:top-[40%] md:left-[10%] lg:top-[30%] lg:left-[26%] md:w-[80%] lg:w-[40%] space-y-5">
+          <div className="absolute w-full h-full bg-black opacity-50"></div>
+          <div className="absolute top-[30%] md:top-[40%] md:left-[10%] lg:top-[30%] lg:left-[29%] md:w-[80%] lg:w-[40%] space-y-5">
             <h1 className="text-2xl md:text-4xl lg:text-7xl">
               Your Escape Awaits! Welcome to Ilk Lodge
             </h1>
@@ -70,12 +62,12 @@ const Banner = () => {
               }
             </p>
           </div>
-          <img src={bed3} className="lg:h-[75vh] w-[95vw] object-cover" />
+          <img src={bed3} className="w-screen lg:h-screen object-cover" />
         </div>
 
         <div className="panel relative">
-          <div className="absolute w-full h-full bg-black opacity-30"></div>
-          <div className="absolute top-[30%] md:top-[40%] md:left-[10%] lg:top-[30%] lg:left-[26%] md:w-[80%] lg:w-[40%] space-y-5">
+          <div className="absolute w-full h-full bg-black opacity-40"></div>
+          <div className="absolute top-[30%] md:top-[40%] md:left-[10%] lg:top-[30%] lg:left-[29%] md:w-[80%] lg:w-[40%] space-y-5">
             <h1 className="text-2xl md:text-4xl lg:text-7xl">
               Indulge in the Extraordinary! As you step through the doors of Ilk
               Lodge!
@@ -86,12 +78,15 @@ const Banner = () => {
               }
             </p>
           </div>
-          <img src={bed4} className="lg:h-[75vh] w-[95vw] object-cover" />
+          <img
+            src={bed4}
+            className="w-screen h-[35vh] md:h-[64vh] lg:h-screen object-cover"
+          />
         </div>
 
         <div className="panel relative">
-          <div className="absolute w-full h-full bg-black opacity-40"></div>
-          <div className="absolute top-[30%] md:top-[40%] md:left-[10%] lg:top-[30%] lg:left-[26%] md:w-[80%] lg:w-[40%] space-y-5">
+          <div className="absolute w-full h-full bg-black opacity-50"></div>
+          <div className="absolute top-[30%] md:top-[40%] md:left-[10%] lg:top-[30%] lg:left-[29%] md:w-[80%] lg:w-[40%] space-y-5">
             <h1 className="text-2xl md:text-4xl lg:text-7xl">
               Welcome to Our Haven of Hospitality! At Ilk Lodge!
             </h1>
@@ -101,7 +96,7 @@ const Banner = () => {
               }
             </p>
           </div>
-          <img src={bed5} className="lg:h-[75vh] w-[95vw] object-cover" />
+          <img src={bed5} className="w-screen lg:h-screen object-cover" />
         </div>
       </Flicking>
     </div>

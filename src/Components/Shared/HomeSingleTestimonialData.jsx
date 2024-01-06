@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const HomeSingleTestimonialData = ({ data }) => {
   const { photo, name, reviewText } = data || {};
   return (
-    <div className="flex justify-center items-center gap-5 rounded-xl p-5 bg-white dark:bg-[#212538] text-black dark:text-white h-[24vh] lg:h-[35vh] w-[95vw] md:w-[60vw] lg:w-[30vw] mr-20">
+    <div className="flex justify-center items-center gap-5 rounded-xl p-5 bg-white dark:bg-[#212538] text-black dark:text-white h-[24vh] lg:h-[30vh] w-[95vw] md:w-[60vw] lg:w-[30vw] mr-20">
       <figure className="flex-1">
         <img
           src={photo}

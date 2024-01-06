@@ -1,30 +1,46 @@
 import { Link } from "react-router-dom";
-import { PiEyeBold } from "react-icons/pi";
+import { FaUserAlt } from "react-icons/fa";
+import { SiZerodha } from "react-icons/si";
+
 import PropTypes from "prop-types";
 
 const SingleRoom = ({ data }) => {
-  const { _id, photo, price, reviewCount } = data || {};
+  const { _id, photo, price, reviewCount, type, size } = data || {};
 
   return (
     <div>
-      <div className="relative justify-self-center">
-        <img
-          src={photo}
-          className="md:w-[50vw] md:h-[30vh] lg:w-[22vw]  lg:h-[32vh] object-cover rounded-xl"
-        />
-        <div>
-          <p className="absolute bottom-5 left-5 lg:text-xl font-semibold text-white">
-            Price : {price}$
-          </p>
-            <p className="absolute bottom-5 right-5 lg:text-xl font-semibold text-white">
-              Review : {reviewCount}
+      <div className="card w-[350px] md:w-80 lg:w-96 md:h-[55vh] lg:h-[50vh] bg-[#ffffff] shadow-xl rounded-none mx-auto">
+        <figure>
+          <img src={photo} className="h-60 w-full" />
+        </figure>
+        <div className="card-body">
+          <div className="flex items-center gap-5 lg:gap-10 text-gray-500">
+            <div className="flex items-center gap-2 lg:gap-5">
+              <FaUserAlt />{" "}
+              <span className="text-[16px]">Review: {reviewCount}</span>
+            </div>
+            <div className="flex items-center gap-2 lg:gap-5">
+              <SiZerodha />{" "}
+              <span className="text-[16px]">
+                Size: {size} ft<sup>2</sup>
+              </span>
+            </div>
+          </div>
+          <h2 className="font-Edu text-2xl lg:text-3xl">{type}</h2>
+          <p></p>
+          <div className="flex items-center">
+            <p className="text-xl">
+              <span className="text-[#fdba74] font-bold">${price}</span> per
+              night
             </p>
+            <Link to={`/rooms/${_id}`}>
+              {" "}
+              <button className="bg-[#fdba74] text-black font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-3 ">
+                Book Now
+              </button>
+            </Link>
+          </div>
         </div>
-        <Link to={`/rooms/${_id}`}>
-          <button className="md:w-[43.8vw] md:h-[30vh] lg:w-[22vw]  lg:h-[32vh] object-cover bg-black dark:bg-cyan-900 absolute inset-0 rounded-xl opacity-0 transition duration-700 ease-out hover:opacity-40 hover:dark:opacity-70 z-10">
-            <PiEyeBold className="text-2xl md:text-3xl lg:text-5xl text-white dark:text-cyan-400 inline" />
-          </button>
-        </Link>
       </div>
     </div>
   );

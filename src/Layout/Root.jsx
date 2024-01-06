@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const Root = () => {
   return (
-    <div className="font-Jost  bg-blue-50 dark:bg-slate-900 text-black dark:text-white">
+    <div className="font-Jost bg-[#f9f8f7] dark:bg-slate-900 text-black dark:text-white">
       <Helmet>
         <meta charSet="utf-8" />
         <title>{"Ilk Lodge"}</title>
